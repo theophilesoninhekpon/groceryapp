@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\TenantController;
+use App\Http\Controllers\RightsManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +34,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    // Route pour afficher la page de gestion des Tenant
+    Route::get('/tenants', [TenantController::class, 'index'])
+    ->name('tenants');
+
+    // Route pour enregistrer un client
+    Route::post('/tenants/create', [TenantController::class, 'store'])->name('tenants.create');
+    
+    // Route pour afficher la page de gestion des droits
+    Route::get('/rights-managements', [RightsManagementController::class, 'index'])
+    ->name('rights-managements');
 });

@@ -52,20 +52,23 @@ const logout = () => {
                 <nav class="flex flex-col">
                     <Link
                         class="text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 "
+                        :href="route('dashboard')"
                     >
-                        Gestion des employés
+                        Accueil
                     </Link>
                     <Link
                         class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 "
+                        :href="route('tenants')"
                     >
                         Gestion des clients
                     </Link>
                     <Link
-                        class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 "
+                        class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8" 
+                        :href="route('rights-managements')"
                     >
-                        Gestion des fournisseurs
+                        Gestion des droits
                     </Link>
-                    <Link
+                    <!-- <Link
                         class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 "
                     >
                         Gestion des utilisateurs
@@ -74,7 +77,7 @@ const logout = () => {
                         class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 border-b border-b-gray-600"
                     >
                         Gestion des factures d'achat
-                    </Link>
+                    </Link> -->
                 </nav>
             </header>
 
