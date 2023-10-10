@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Stancl\Tenancy\Database\Models\Tenant as BaseTenant;
 use Stancl\Tenancy\Contracts\TenantWithDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDatabase;
@@ -12,14 +13,19 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     use HasDatabase, HasDomains;
 
     public static function getCustomColumns(): array
-{
-    return [
-        'id',
-        'offers_id',
-        'company',
-        // 'access_token',
-        'created_by',
-        'updated_by'
-    ];
-}
+    {
+        return [
+            'id',
+            'offers_id',
+            'company',
+            // 'access_token',
+            'created_by',
+            'updated_by'
+        ];
+    }
+
+    public function domains()
+    {
+        return $this->hasMany(config('tenancy.domain_model'));
+    }
 }

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
-use Stancl\Tenancy\UUIDGenerator;
-use Symfony\Component\Uid\UuidV8;
 use Stancl\Tenancy\Database\Models\Domain;
 
 class TenantController extends Controller
@@ -15,8 +13,16 @@ class TenantController extends Controller
     // Afficher tous les clients déjà enregistrés
     public function index()
     {
+        // dd(Tenant::find('270f679c-6d75-460e-b674-e11f7d7eb554')->domains()->get());
         return Inertia::render('Tenants', [
-            'tenants' => Tenant::with('domains')->get()
+            'tenants' => Tenant::all()->transform( function($tenant) {
+                return [
+                    'company' => $tenant->company,
+                    'domain' => $tenant->domains()->get('domain'),
+                    'db_name' => $tenant->tenancy_db_name,
+                    'created_at' => $tenant->created_at
+                ];
+            })
         ]);
     }
 
