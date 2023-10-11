@@ -2,9 +2,10 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TenantController;
-use App\Http\Controllers\RightsManagementController;
+use App\Http\Controllers\LicenseController;
+use App\Http\Controllers\OfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
@@ -34,15 +33,27 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    
+    // Routes du CRUD Offres
+    Route::get('/offers', [OfferController::class, 'index'])->name('offers');
 
-    // Route pour afficher la page de gestion des Tenant
-    Route::get('/tenants', [TenantController::class, 'index'])
-    ->name('tenants');
-
-    // Route pour enregistrer un client
+    // Routes du CRUD Tenant
+    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants');
     Route::post('/tenants/create', [TenantController::class, 'store'])->name('tenants.create');
     
-    // Route pour afficher la page de gestion des droits
-    Route::get('/rights-managements', [RightsManagementController::class, 'index'])
-    ->name('rights-managements');
+    // Routes du CRUD Licenses
+    Route::get('/licenses', [LicenseController::class, 'index'])->name('licenses');
+
+    // Routes du CRUD Tickets
+    Route::get('/tickets', function () { return Inertia::render('Dashboard');})->name('tickets');
+
+    // Routes du CRUD SuperAdmin (Users)
+    Route::get('/superadmin', [UserController::class, 'index'])->name('superadmin');
+
+    // Routes de la vue Dépannage
+    Route::get('/troubleshooting', function () { return Inertia::render('Dashboard');})->name('troubleshooting');
+
+    // Routes de la vue Paramètres
+    Route::get('/settings', function () { return Inertia::render('Dashboard');})->name('settings');
+
 });

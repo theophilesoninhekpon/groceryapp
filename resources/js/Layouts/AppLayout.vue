@@ -4,27 +4,14 @@ import { Head, Link, router } from "@inertiajs/vue3";
 import ApplicationMark from "@/Components/ApplicationMark.vue";
 import Banner from "@/Components/Banner.vue";
 import Dropdown from "@/Components/Dropdown.vue";
+import NavDropdown from "@/Components/CustomComponents/NavDropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
-import NavLink from "@/Components/NavLink.vue";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import Icons from "@/Components/CustomComponents/Icons.vue";
+import SideBarNavLink from "@/Components/CustomComponents/SideBarNavLink.vue";
 
 defineProps({
     title: String,
 });
-
-const showingNavigationDropdown = ref(false);
-
-const switchToTeam = (team) => {
-    router.put(
-        route("current-team.update"),
-        {
-            team_id: team.id,
-        },
-        {
-            preserveState: false,
-        }
-    );
-};
 
 const logout = () => {
     router.post(route("logout"));
@@ -33,74 +20,119 @@ const logout = () => {
 
 <template>
     <div>
+
         <Head :title="title" />
 
         <Banner />
 
-        <div class="min-h-screen bg-gray-100 flex">
-            <header
-                class="flex-col items-center justify-center bg-red-400 shadow-lg w-1/5"
-            >
-                <!-- Primary Navigation Menu -->
-                <!-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex"> -->
-                <div class="flex items-center justify-center my-4">
-                    <Link :href="route('dashboard')">
-                        <ApplicationMark class="block h-auto w-20" />
-                    </Link>
+        <div class="min-h-screen bg-gray-100 flex flex-col">
+
+            <!-- Menu de navigation principale -->
+            <header class="flex justify-between bg-red-400 shadow-md h-1/5">
+                <div class="flex items-center">
+                    <div class="flex items-center pr-24 pl-8">
+                        <Link :href="route('dashboard')">
+                        <ApplicationMark class="h-auto w-20" />
+                        </Link>
+                    </div>
+                    <p class="font-bold text-3xl text-white"> John Doe </p>
                 </div>
-                <nav class="flex flex-col">
-                    <Link
-                        class="text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 "
-                        :href="route('dashboard')"
-                    >
-                        Accueil
+
+                <div class="flex justify-between items-center p-5 space-x-10 mr-10">
+                    <Link>
+                    <Icons name="notification" />
                     </Link>
-                    <Link
-                        class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 "
-                        :href="route('tenants')"
-                    >
-                        Gestion des clients
-                    </Link>
-                    <Link
-                        class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8" 
-                        :href="route('rights-managements')"
-                    >
-                        Gestion des droits
-                    </Link>
-                    <!-- <Link
-                        class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 "
-                    >
-                        Gestion des utilisateurs
-                    </Link>
-                    <Link
-                        class="flex text-white hover:bg-gray-600 hover:text-red-400 px-8 py-8 border-b border-b-gray-600"
-                    >
-                        Gestion des factures d'achat
-                    </Link> -->
-                </nav>
+
+                    <NavDropdown>
+                        <template #trigger>
+                            <div class="cursor-pointer">
+                                <Icons name="language" />
+                            </div>
+                        </template>
+                        <template #content>
+                            <DropdownLink>
+                                FR
+                            </DropdownLink>
+                            <DropdownLink>
+                                EN
+                            </DropdownLink>
+                        </template>
+                    </NavDropdown>
+
+                    <Dropdown>
+                        <template #trigger>
+                            <div class="cursor-pointer">
+                                <Icons name="user" />
+                            </div>
+                        </template>
+                        <template #content>
+                            <p class="px-4 py-2">Username</p>
+                            <DropdownLink>
+                                Profil
+                            </DropdownLink>
+                            <DropdownLink as="button" @click="logout">
+                                Déconnexion
+                            </DropdownLink>
+                        </template>
+                    </Dropdown>
+                </div>
+
             </header>
 
-            <!-- Page Content -->
-            <main class="w-4/5">
-                <div class="flex justify-end items-center h-16 shadow-md p-5">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#f87171"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="#f3f4f6"
-                        class="w-10 h-10"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                    </svg>
+            <!-- Corps de l'interface -->
+            <main class="flex">
+
+                <!-- Menu de navigation latéral -->
+                <nav class="flex flex-col bg-zinc-700 height shadow-lg">
+                    <SideBarNavLink :active="route().current('dashboard')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                        :href="route('dashboard')">
+                    Accueil
+                    </SideBarNavLink >
+                    <div>
+                        <p class="pr-16 pl-10 pt-8 pb-6 text-zinc-300">Licences</p>
+                        <div class="flex flex-col">
+                            <SideBarNavLink :active="route().current('offers')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-16 py-6 text-zinc-300"
+                                :href="route('offers')">
+                            Offres
+                            </SideBarNavLink >
+                            <SideBarNavLink :active="route().current('licenses')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-16 py-6 text-zinc-300"
+                                :href="route('licenses')">
+                            Gestion
+                            </SideBarNavLink >
+                        </div>
+                    </div>
+                    <SideBarNavLink :active="route().current('tickets')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                        :href="route('tickets')">
+                    Tickets
+                    </SideBarNavLink >
+                    <SideBarNavLink :active="route().current('superadmin')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                        :href="route('superadmin')">
+                    Super Admin
+                    </SideBarNavLink >
+                    <SideBarNavLink :active="route().current('troubleshooting')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                        :href="route('troubleshooting')">
+                    Dépannage
+                    </SideBarNavLink >
+                    <SideBarNavLink :active="route().current('settings')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                        :href="route('settings')">
+                    Paramètres
+                    </SideBarNavLink >
+                </nav>
+
+                <!-- Corps de la vue -->
+                <div class="flex-1">
+                    <h1 class="mt-6 ml-8 text-3xl font-bold text-zinc-700">
+                        <slot name="title" />
+                    </h1>
+                    <slot />
                 </div>
-                <slot />
             </main>
         </div>
     </div>
 </template>
+
+<style>
+.height {
+    height: calc(100vh - 88px) !important;
+}
+</style>

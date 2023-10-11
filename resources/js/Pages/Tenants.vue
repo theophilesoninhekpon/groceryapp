@@ -1,12 +1,12 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import CreateTenantForm from '@/Components/TenantsComponent.vue';
-import TenantsComponent from '@/Components/CreateTenantForm.vue';
+import CreateTenantForm from '@/Components/CustomComponents/TenantsComponent.vue';
+import TenantsComponent from '@/Components/CustomComponents/CreateTenantForm.vue';
 
 const props = defineProps({
     tenants: Object
 });
-console.log(props.tenants);
+
 </script>
 
 <template>

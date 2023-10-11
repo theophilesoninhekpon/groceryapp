@@ -19,10 +19,8 @@ class CreateTenantsTable extends Migration
             $table->string('id')->primary()->nullable();
             
             // your custom columns may go here
-            $table->foreignId('offers_id');
             $table->string('company');
-            // $table->string('domain_name');
-            // $table->string('database');
+            // $table->foreignId('license_id');
             // $table->string('access_token');
             $table->integer('created_by');
             $table->integer('updated_by');

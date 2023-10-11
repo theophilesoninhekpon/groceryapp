@@ -6,13 +6,13 @@ import Welcome from "@/Components/Welcome.vue";
 <template>
     <AppLayout title="Dashboard">
         <template #title>
-            Tableau de bord
+            Clients
         </template>
         <div class="py-12">
             <div
                 class="w-full flex justify-center items-center"
             >
-                <Welcome />
+                Clients
             </div>
         </div>
     </AppLayout>
