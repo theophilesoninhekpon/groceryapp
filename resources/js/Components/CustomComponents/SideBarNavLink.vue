@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { Link } from '@inertiajs/vue3';
+import Icons from '@/Components/CustomComponents/Icons.vue';
 
 const props = defineProps({
     href: String,
@@ -15,13 +16,12 @@ const props = defineProps({
 </script>
 
 <template>
-    <Link :href="href" :class="classes">
-    <div class="flex items-center space-x-5">
+    <Link :href="href" class="relative">
+    <div class="flex items-center">
         <slot />
-        <svg v-if="active" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="#f87171" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-        </svg>
+        <div class="absolute right-5">
+            <Icons name="caret" :active="active"/>
+        </div>
     </div>
     </Link>
 </template>

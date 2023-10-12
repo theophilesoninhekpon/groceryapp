@@ -35,11 +35,11 @@ const logout = () => {
                         <ApplicationMark class="h-auto w-20" />
                         </Link>
                     </div>
-                    <p class="font-bold text-3xl text-white"> John Doe </p>
+                    <p class="font-bold text-3xl text-white"> {{ $page.props.auth.user.name }} </p>
                 </div>
 
                 <div class="flex justify-between items-center p-5 space-x-10 mr-10">
-                    <Link>
+                    <Link href="#">
                     <Icons name="notification" />
                     </Link>
 
@@ -50,12 +50,12 @@ const logout = () => {
                             </div>
                         </template>
                         <template #content>
-                            <DropdownLink>
+                            <!-- <DropdownLink>
                                 FR
                             </DropdownLink>
                             <DropdownLink>
                                 EN
-                            </DropdownLink>
+                            </DropdownLink> -->
                         </template>
                     </NavDropdown>
 
@@ -66,13 +66,13 @@ const logout = () => {
                             </div>
                         </template>
                         <template #content>
-                            <p class="px-4 py-2">Username</p>
-                            <DropdownLink>
+                            <p class="px-4 py-2">{{ $page.props.auth.user.name }}</p>
+                            <!-- <DropdownLink>
                                 Profil
                             </DropdownLink>
                             <DropdownLink as="button" @click="logout">
                                 Déconnexion
-                            </DropdownLink>
+                            </DropdownLink> -->
                         </template>
                     </Dropdown>
                 </div>

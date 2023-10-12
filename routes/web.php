@@ -36,6 +36,8 @@ Route::middleware([
     
     // Routes du CRUD Offres
     Route::get('/offers', [OfferController::class, 'index'])->name('offers');
+    Route::post('/offers/create', [OfferController::class, 'store'])->name('offers.create');
+    Route::get('/offers/{offer}/show', [OfferController::class, 'getOffer'])->name('offers.show');
 
     // Routes du CRUD Tenant
     Route::get('/tenants', [TenantController::class, 'index'])->name('tenants');

@@ -13,7 +13,9 @@ class OfferController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Offers');
+        return Inertia::render('Offers', [
+            'offers' => Offer::all()
+        ]);
     }
 
     /**
@@ -29,7 +31,23 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation des données du formulaire
+        $validated = $request->validate([
+            'description' => 'required|string|max:255',
+            'duration' => 'required|integer|max:36', 
+            'numberOfUsers' => 'required|integer|max:200'
+        ]);
+        $data = [
+            'description' => $validated['description'],
+            'duration' => $validated['duration'],
+            'number_of_users' => $validated['numberOfUsers'],
+            'created_by' => $request->user()->id,
+            'updated_by' => $request->user()->id
+        ];
+        
+        Offer::create($data);
+        // dd($offer);
+        return to_route('offers');
     }
 
     /**
@@ -38,6 +56,14 @@ class OfferController extends Controller
     public function show(Offer $offer)
     {
         //
+    }
+
+    /**
+     * Retrieve a specified offer.
+     */
+    public function getOffer(Offer $offer)
+    {
+        return Offer::find($offer);
     }
 
     /**
