@@ -1,8 +1,6 @@
 <script setup>
-
-import { ref, onMounted } from "vue";
-import NavDropdown from "@/Components/CustomComponents/NavDropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
+import { ref } from "vue";
+import OfferDetails from "@/Components/CustomComponents/OfferDetails.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CreateButton from "@/Components/CustomComponents/CreateButton.vue";
 import ModalForm from "@/Components/CustomComponents/ModalForm.vue";
@@ -11,26 +9,33 @@ import EditOfferForm from "@/Components/CustomComponents/EditOfferForm.vue"
 import Icons from "@/Components/CustomComponents/Icons.vue";
 
 // Props du composant
-defineProps({
+const props = defineProps({
     offers: Object
 });
 
 // Variable qui conditionne l'affichage du modal
 const showModal = ref(false);
 const showEditModal = ref(false);
+const showDetailsModal = ref(false);
 const offerData = ref({});
 
-// Afficher le modal du formulaire de mise à jour
-const showEditForm = () => {
-    showEditModal.value = !showEditModal.value;
+// Afficher le modal des détails d'un formulaire
+const showOfferDetails = () => {
+    showDetailsModal.value = true;
 }
 
+// Affichage du formulaire de modification d'une offre
+const canShowEditModalForm = () => {
+    showDetailsModal.value = false;
+    showEditModal.value = true; 
+}
 // Récupération de l'offre
 const getOfferData = async (id) => {
     try {
         let response = await axios.get('offers/' + id + '/show');
         let data = response.data[0];
         offerData.value = data;
+        showOfferDetails();
     } catch (error) {
         console.log(error); 
     }
@@ -42,23 +47,26 @@ const getOfferData = async (id) => {
     <!-- Layout -->
     <AppLayout title="Dashboard">
         <template #title>
-            Offres
-        </template>
-        <div class="py-12">
-            <div class="w-full flex items-center">
-                <div class="w-full flex justify-end mr-10">
+            <div class="flex items-center">
+                Offres
+                <div class="ml-3 p-4 rounded-full bg-red-400 flex items-center justify-center text-white text-2xl w-5 h-5">
+                    {{ offers.length }}
+                </div>
+                <div class="flex justify-end ml-10">
                     <CreateButton class="flex gap-x-2 items-center" @click="showModal = !showModal">
-                        Créer une offre
+                        Créer
                         <Icons name="plus" />
                     </CreateButton>
                 </div>
             </div>
+        </template>
+        <div class="py-12">
 
             <!-- Formulaire de création d'une offre en modal -->
             <ModalForm :show="showModal" @close="showModal = !showModal">
                 <div class="py-12 relative">
                     <h2 class="text-center text-3xl font-bold mb-8"> Créer une offre </h2>
-                    <OfferForm @close="showModal = !showModal"/>
+                    <OfferForm @close="showModal = !showModal" :offer="offerData"/>
                 </div>
             </ModalForm>
 
@@ -66,33 +74,20 @@ const getOfferData = async (id) => {
             <ModalForm :show="showEditModal" @close="showEditModal = !showEditModal">
                 <div class="py-12 relative">
                     <h2 class="text-center text-3xl font-bold mb-8"> Modifier une offre </h2>
-                    <EditOfferForm @close="showEditModal = !showEditModal" :offers="offerData"/>
+                    <EditOfferForm @close="showEditModal = !showEditModal" :offer="offerData"/>
+                </div>
+            </ModalForm>
+
+            <!-- Affichage des détails d'une offre en modal -->
+            <ModalForm :show="showDetailsModal" @close="showDetailsModal = !showDetailsModal">
+                <div class="py-12 relative">
+                    <OfferDetails @showEditModalForm="canShowEditModalForm" @close="showDetailsModal = !showDetailsModal" :offer="offerData"/>
                 </div>
             </ModalForm>
 
             <!-- Cartes des offres -->
-            <div class="flex justify-center flex-wrap gap-x-10 gap-y-5 mt-10">
-                <div v-for="offer in offers" class="w-1/4 p-5 rounded-lg shadow-md bg-white">
-
-                        <!-- Menu d'édition (Modifier, suppression) -->
-                        <div class="flex justify-end -me-3">
-                            <NavDropdown>
-                                <template #trigger>
-                                    <div class="cursor-pointer">
-                                       <Icons name="vertical-menu" />
-                                    </div>
-                                </template>
-                                <template #content>
-                                    <DropdownLink @click="getOfferData(offer.id)">
-                                        Modifier
-                                    </DropdownLink>
-                                    <DropdownLink >
-                                        Supprimer
-                                    </DropdownLink>
-                                </template>
-                            </NavDropdown>
-                        </div>
-    
+            <div class="flex justify-center flex-wrap gap-x-20 gap-y-5 mt-10 mx-10">
+                <button v-for="offer in offers" class="w-1/4 p-5 rounded-lg shadow-md bg-white hover:bg-red-200 transition-all duration-500" @click="getOfferData(offer.id)">
                     <div class="items-center flex flex-col items-center">
                         <div class="flex bg-red-400 items-center justify-center p-5 rounded-full shadow-md mb-5">
                             <Icons name="dollar" />
@@ -101,7 +96,7 @@ const getOfferData = async (id) => {
                         <div class="text-center">{{ offer.duration }} mois</div>
                         <div class="text-center">{{ offer.number_of_users }} utilisateurs</div>
                     </div>
-                </div>
+                </button>
             </div>
     </div>
 </AppLayout></template>

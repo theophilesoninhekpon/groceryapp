@@ -1,10 +1,10 @@
 <script setup>
 import { onMounted } from 'vue'; 
 import { useForm } from '@inertiajs/vue3';
-import CreateOfferButton from './CreateOfferButton.vue';
+import PrimaryButton from './PrimaryButton.vue';
 
 const props = defineProps({
-    offers: Object
+    offer: Object
 });
 
 // Enregistrement des données du formulaire
@@ -16,10 +16,10 @@ const form = useForm({
 
 // Au rendement du composant actuel
 onMounted(() => {
-    if(props.offers) {
-        form.description = props.offers.description;
-        form.duration = props.offers.duration;
-        form.numberOfUsers = props.offers.number_of_users;
+    if(props.offer) {
+        form.description = props.offer.description;
+        form.duration = props.offer.duration;
+        form.numberOfUsers = props.offer.number_of_users;
     }
 })
 
@@ -29,7 +29,7 @@ const emit = defineEmits(['close']);
 // Fonction de soumission du formulaire
 const submit = () => {
     emit('close');
-    form.post(route('offers.create'));
+    form.patch(route('offers.update', props.offer));
 }
 </script>
 
@@ -51,7 +51,7 @@ const submit = () => {
             <div v-if="form.errors.numberOfUsers" class="text-red-400">{{ form.errors.numberOfUsers }}</div>
         </div>
         <div class="w-4/5 mx-auto flex justify-center">
-            <CreateOfferButton type="submit" :disabled="form.processing"/>
+            <PrimaryButton name="Mettre à jour" type="submit" :disabled="form.processing"/>
         </div>
     </form>
 </template>

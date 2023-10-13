@@ -20,8 +20,6 @@ class CreateTenantsTable extends Migration
             
             // your custom columns may go here
             $table->string('company');
-            // $table->foreignId('license_id');
-            // $table->string('access_token');
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->timestamps();

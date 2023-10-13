@@ -11,9 +11,13 @@ class License extends Model
 {
     use HasFactory;
 
-    // // Relation entre la table License et la table tenant
-    // public function tenant(): BelongsTo 
-    // {
-    //     return $this->belongsTo(Tenant::class);
-    // }
+    // Les champs modifiables
+    protected $fillable = [
+        'offers_id',
+        'status',
+        'access_token',
+        'expires_at',
+        'created_by',
+        'updated_by'
+    ];
 }

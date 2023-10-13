@@ -47,4 +47,5 @@ import Icons from './CustomComponents/Icons.vue';
                 <div class="text-5xl">2</div>
             </div>
     </div>
-</div></template>
+</div>
+</template>

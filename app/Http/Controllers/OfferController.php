@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Offer;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Crypt;
 
 class OfferController extends Controller
 {
@@ -14,7 +15,13 @@ class OfferController extends Controller
     public function index()
     {
         return Inertia::render('Offers', [
-            'offers' => Offer::all()
+            'offers' => Offer::all()->transform(function ($offer) {
+                return [
+                    'description' => $offer->description,
+                    'duration' => ($offer->duration) / (30 * 24 * 60 * 60),
+                    'number_of_users' => $offer->number_of_users
+                ];
+            })
         ]);
     }
 
@@ -39,15 +46,14 @@ class OfferController extends Controller
         ]);
         $data = [
             'description' => $validated['description'],
-            'duration' => $validated['duration'],
+            'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
             'number_of_users' => $validated['numberOfUsers'],
             'created_by' => $request->user()->id,
             'updated_by' => $request->user()->id
         ];
         
         Offer::create($data);
-        // dd($offer);
-        return to_route('offers');
+
     }
 
     /**
@@ -79,7 +85,22 @@ class OfferController extends Controller
      */
     public function update(Request $request, Offer $offer)
     {
-        //
+    
+        $validated = $request->validate([
+            'description' => 'required|string|max:255',
+            'duration' => 'required|integer|max:36', 
+            'numberOfUsers' => 'required|integer|max:200'
+        ]);
+
+        $data = [
+            'description' => $validated['description'],
+            'duration' => $validated['duration'],
+            'number_of_users' => $validated['numberOfUsers'],
+            'updated_by' => $request->user()->id
+        ];
+
+        $offer->update($data);
+
     }
 
     /**
@@ -87,6 +108,6 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        //
+        $offer->delete();
     }
 }

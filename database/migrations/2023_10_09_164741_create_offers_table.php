@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('duration');
             $table->integer('number_of_users')->default(0);
             $table->integer('created_by')->default(0);
-            $table->integer('updated_by')->default(0)   ;
+            $table->integer('updated_by')->default(0);
             $table->timestamps();
         });
     }

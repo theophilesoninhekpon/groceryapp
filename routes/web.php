@@ -37,7 +37,9 @@ Route::middleware([
     // Routes du CRUD Offres
     Route::get('/offers', [OfferController::class, 'index'])->name('offers');
     Route::post('/offers/create', [OfferController::class, 'store'])->name('offers.create');
+    Route::delete('/offers/{offer}/delete', [OfferController::class, 'destroy'])->name('offers.delete');
     Route::get('/offers/{offer}/show', [OfferController::class, 'getOffer'])->name('offers.show');
+    Route::patch('/offers/{offer}/update', [OfferController::class, 'update'])->name('offers.update');
 
     // Routes du CRUD Tenant
     Route::get('/tenants', [TenantController::class, 'index'])->name('tenants');
@@ -45,6 +47,7 @@ Route::middleware([
     
     // Routes du CRUD Licenses
     Route::get('/licenses', [LicenseController::class, 'index'])->name('licenses');
+    Route::post('/licenses/create', [LicenseController::class, 'store'])->name('licenses.create');
 
     // Routes du CRUD Tickets
     Route::get('/tickets', function () { return Inertia::render('Dashboard');})->name('tickets');

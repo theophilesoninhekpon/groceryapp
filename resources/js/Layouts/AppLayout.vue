@@ -50,12 +50,12 @@ const logout = () => {
                             </div>
                         </template>
                         <template #content>
-                            <!-- <DropdownLink>
+                            <DropdownLink as="button">
                                 FR
                             </DropdownLink>
-                            <DropdownLink>
+                            <DropdownLink as="button">
                                 EN
-                            </DropdownLink> -->
+                            </DropdownLink>
                         </template>
                     </NavDropdown>
 
@@ -67,12 +67,12 @@ const logout = () => {
                         </template>
                         <template #content>
                             <p class="px-4 py-2">{{ $page.props.auth.user.name }}</p>
-                            <!-- <DropdownLink>
+                            <DropdownLink as="button">
                                 Profil
                             </DropdownLink>
                             <DropdownLink as="button" @click="logout">
                                 Déconnexion
-                            </DropdownLink> -->
+                            </DropdownLink>
                         </template>
                     </Dropdown>
                 </div>
@@ -101,6 +101,10 @@ const logout = () => {
                             </SideBarNavLink >
                         </div>
                     </div>
+                    <SideBarNavLink :active="route().current('tenants')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                        :href="route('tenants')">
+                    Clients
+                    </SideBarNavLink >
                     <SideBarNavLink :active="route().current('tickets')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('tickets')">
                     Tickets

@@ -17,7 +17,6 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     {
         return [
             'id',
-            'offers_id',
             'company',
             // 'access_token',
             'created_by',

@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tenants_has_licenses', function (Blueprint $table) {
-            $table->foreignId('tenants_id');
+            $table->string('tenants_id');
             $table->foreignId('licenses_id');
             $table->timestamps();
+            $table->foreign('tenants_id')->references('id')->on('tenants')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

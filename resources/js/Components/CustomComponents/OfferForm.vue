@@ -1,6 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import CreateOfferButton from './CreateOfferButton.vue';
+import PrimaryButton from './PrimaryButton.vue';
 
 // Enregistrement des données du formulaire
 const form = useForm({
@@ -37,7 +37,7 @@ const submit = () => {
             <div v-if="form.errors.numberOfUsers" class="text-red-400">{{ form.errors.numberOfUsers }}</div>
         </div>
         <div class="w-4/5 mx-auto flex justify-center">
-            <CreateOfferButton type="submit" :disabled="form.processing"/>
+            <PrimaryButton name="Enregistrer" type="submit" :disabled="form.processing"/>
         </div>
     </form>
 </template>
