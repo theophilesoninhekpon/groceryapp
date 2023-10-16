@@ -24,7 +24,7 @@ class LicenseController extends Controller
                 return [
                     'id' => $license->id,
                     'offer'=> Offer::where('id','=', $license->offers_id)->pluck('description')[0],
-                    'company' => Tenant::find(DB::table('tenants_has_licenses')->where('licenses_id','=',$license->id)->pluck('tenants_id')[0])->pluck('company')[0],
+                    'company' => Tenant::find(DB::table('tenants_has_licenses')->where('licenses_id','=',$license->id)->pluck('tenants_id'))->pluck('company')[0],
                     'status' => $license->status,
                     'purchased_at' => $license->created_at,
                     'expires_at' => $license->expires_at,
@@ -118,12 +118,35 @@ class LicenseController extends Controller
     }
 
     /**
-     * Update the specified license in storage.
+     * Check expiration date of license
      */
-    public function update(Request $request, License $license)
+
+    /**
+     * Update the specified license's offer in storage.
+     */
+    public function updateOffer(Request $request, License $license)
+    {
+        //
+        // Mettre à jour la date d'expiration si l'offre changeante est supérieure à l'offre à changer
+        // Mettre à jour la date d'expiration si l'offre changeante est inférieure à l'offre à changer et si il n'a pas encore atteint la date d'expiration de l'offre actuelle
+            // Sinon pas de changement
+            // expires_at = activated_at + duree de l'offre changeante
+
+        // Mettre à jour le nombre d'utilisateurs à créer
+            // Checker le nombre de users dans la base de données du tenant 
+            // Si le nombre de users est inférieur à celui de l'offre changeante, alors on met à jour
+            // Sinon pas de changement
+    }
+
+    /**
+     * Update the specified license status in storage.
+     */
+    public function updateStatus(Request $request, License $license)
     {
         //
     }
+
+
 
     /**
      * Remove the specified license from storage.
