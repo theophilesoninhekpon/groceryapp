@@ -8,6 +8,7 @@ import OfferForm from "@/Components/CustomComponents/OfferForm.vue";
 import EditOfferForm from "@/Components/CustomComponents/EditOfferForm.vue"
 import Icons from "@/Components/CustomComponents/Icons.vue";
 
+
 // Props du composant
 const props = defineProps({
     offers: Object
@@ -18,6 +19,7 @@ const showModal = ref(false);
 const showEditModal = ref(false);
 const showDetailsModal = ref(false);
 const offerData = ref({});
+const showNotification = ref(false);
 
 // Afficher le modal des détails d'un formulaire
 const showOfferDetails = () => {
@@ -29,16 +31,39 @@ const canShowEditModalForm = () => {
     showDetailsModal.value = false;
     showEditModal.value = true; 
 }
+
+Echo.private(`offers`)
+    .listen('OfferCreate', (e) => {
+        showNotification.value = true;
+        setTimeout(() => {
+            showNotification.value = false;
+        }, 3000);
+    });
+
 // Récupération de l'offre
-const getOfferData = async (id) => {
-    try {
-        let response = await axios.get('offers/' + id + '/show');
-        let data = response.data[0];
-        offerData.value = data;
-        showOfferDetails();
-    } catch (error) {
-        console.log(error); 
-    }
+// const getOfferData = async (id) => {
+//     try {
+//         let response = await axios.get('offers/' + id + '/show');
+//         let data = response.data[0];
+//         offerData.value = data;
+//         console.log(offerData.value);
+//         showOfferDetails();
+//     } catch (error) {
+//         console.log(error); 
+//     }
+// }
+
+/**
+ * 
+ * @param {number} id 
+ * Fonction qui récupère une offre et affiche ses détails
+ */
+
+const getOfferData = (id) => {
+    // Recherche de l'offre dans les offres disponibles dans la prop offers
+    offerData.value = props.offers.find((offer) => offer.id === id);
+    // Affichage du composant des détails d'une offre
+    showOfferDetails();
 }
 
 </script>
@@ -60,13 +85,18 @@ const getOfferData = async (id) => {
                 </div>
             </div>
         </template>
+
+        <div class="absolute z-10 top-42 right-24 bg-red-400 px-10 py-5 shadow-lg rounded-lg text-white" v-if="showNotification">
+            Une offre a été créée! 
+        </div>
+
         <div class="py-12">
 
             <!-- Formulaire de création d'une offre en modal -->
             <ModalForm :show="showModal" @close="showModal = !showModal">
                 <div class="py-12 relative">
                     <h2 class="text-center text-3xl font-bold mb-8"> Créer une offre </h2>
-                    <OfferForm @close="showModal = !showModal" :offer="offerData"/>
+                    <OfferForm @close="showModal = !showModal"/>
                 </div>
             </ModalForm>
 
@@ -99,4 +129,10 @@ const getOfferData = async (id) => {
                 </button>
             </div>
     </div>
-</AppLayout></template>
+</AppLayout>
+</template>
+
+
+<style>
+
+</style>

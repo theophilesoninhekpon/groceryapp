@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OfferCreate;
 use Inertia\Inertia;
 use App\Models\Offer;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class OfferController extends Controller
         return Inertia::render('Offers', [
             'offers' => Offer::all()->transform(function ($offer) {
                 return [
+                    'id' => $offer->id,
                     'description' => $offer->description,
                     'duration' => ($offer->duration) / (30 * 24 * 60 * 60),
                     'number_of_users' => $offer->number_of_users
@@ -52,7 +54,9 @@ class OfferController extends Controller
             'updated_by' => $request->user()->id
         ];
         
-        Offer::create($data);
+        $offer = Offer::create($data);
+        
+        event(new OfferCreate($offer));
 
     }
 
@@ -94,7 +98,7 @@ class OfferController extends Controller
 
         $data = [
             'description' => $validated['description'],
-            'duration' => $validated['duration'],
+            'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
             'number_of_users' => $validated['numberOfUsers'],
             'updated_by' => $request->user()->id
         ];

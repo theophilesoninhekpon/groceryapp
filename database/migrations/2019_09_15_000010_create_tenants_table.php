@@ -20,6 +20,7 @@ class CreateTenantsTable extends Migration
             
             // your custom columns may go here
             $table->string('company');
+            $table->string('email')->unique();
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->timestamps();

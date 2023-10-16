@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ExpiredLicense;
+use App\Events\ExpiringLicense;
 use DateTime;
 use Carbon\Carbon;
 use Inertia\Inertia;
@@ -10,6 +12,7 @@ use App\Models\Tenant;
 use App\Models\License;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 class LicenseController extends Controller
@@ -19,6 +22,7 @@ class LicenseController extends Controller
      */
     public function index()
     {
+
         return Inertia::render('License', [
             'licenses' => License::all()->transform(function($license) {
                 return [
@@ -26,7 +30,7 @@ class LicenseController extends Controller
                     'offer'=> Offer::where('id','=', $license->offers_id)->pluck('description')[0],
                     'company' => Tenant::find(DB::table('tenants_has_licenses')->where('licenses_id','=',$license->id)->pluck('tenants_id'))->pluck('company')[0],
                     'status' => $license->status,
-                    'purchased_at' => $license->created_at,
+                    'purchased_at' => date_format($license->created_at, 'Y/m/d à H:i:s'),
                     'expires_at' => $license->expires_at,
                 ];
             }),
@@ -35,6 +39,7 @@ class LicenseController extends Controller
             'expiring_licenses' => License::all()->whereBetween('expires_at', [Carbon::now(), Carbon::now()->addDays(10)])->all(),
             'expired_licenses' => License::all()->where('expires_at','<=', Carbon::now())
         ]);
+
     }
 
     /**
@@ -60,11 +65,11 @@ class LicenseController extends Controller
         // Validation des données du formulaire
         $validated = $request->validate([
             'company' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
             'offer' => 'required|integer|max:36', 
         ]);
 
         // Licence
-        // statut ENUM
         $licenseData = [
             'offers_id' => $validated['offer'],
             'status' => 'ACTIVE',
@@ -77,6 +82,7 @@ class LicenseController extends Controller
         // Tenant
         $tenant = [
             'company' => $validated['company'],
+            'email' => $validated['email'],
             'created_by' => $request->user()->id,
             'updated_by' => $request->user()->id,
         ];
@@ -139,11 +145,36 @@ class LicenseController extends Controller
     }
 
     /**
-     * Update the specified license status in storage.
+     * Update the specified license status dynamically.
      */
-    public function updateStatus(Request $request, License $license)
+    public function updateStatus()
     {
-        //
+        $licenses = License::all();
+
+       foreach ($licenses as $license) {
+
+             // Si la date d'expiration est passée, le statut de la licence passe expire (EXPIRED)
+            if($license->expires_at < now()) { 
+                $license->update([ 
+                    'status' => 'INACTIVE'
+                ]);
+                
+                // Déclencher l'évènement à l'expiration de la licence
+                event(new ExpiredLicense($license));
+                
+                // si la date d'expiration est comprise entre la date actuelle et la date actuelle + 10 jours, le statut de la licence est en cours d'expiration (EXPIRING)
+            } else if ($license->expires_at <= now()->addDays(10)  &&  $license->expires_at > now()) {    
+                $license->update([ 
+                    'status' => 'EXPIRING'
+                ]);
+                
+
+                // Déclencher l'évènement quand la licence est à terme
+                event(new ExpiringLicense($license));
+            }
+            return $license;
+       }
+
     }
 
 

@@ -42,6 +42,7 @@ const changeLicenseOffer = (offer) => {
 
     axios.patch(route('license.update'))
 }
+
 </script>
 
 <template>
