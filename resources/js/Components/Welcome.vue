@@ -5,7 +5,7 @@ import Icons from './CustomComponents/Icons.vue';
 <template>
     <!-- Affichage des statistiques de licences en card -->
 
-    <div class="grid grid-cols-4 gap-20 mx-auto">
+    <div class="grid grid-cols-4 gap-20 md:mx-auto md:gap-10">
         <div
             class="bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between gap-x-20">
             <div>

@@ -16,6 +16,7 @@ class OfferCreate implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $offer;
+
     /**
      * Create a new event instance.
      */

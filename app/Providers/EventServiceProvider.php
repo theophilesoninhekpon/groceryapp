@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ExpiredLicense;
 use App\Events\OfferCreate;
+use App\Listeners\LicenseListener;
 use App\Listeners\OfferNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         OfferCreate::class => [
             OfferNotification::class
+        ],
+        ExpiredLicense::class => [
+            LicenseListener::class
         ]
     ];
 

@@ -21,6 +21,7 @@ const submit = () => {
     emit('close');
     form.post(route('licenses.create'));
 }
+
 </script>
 
 <template>

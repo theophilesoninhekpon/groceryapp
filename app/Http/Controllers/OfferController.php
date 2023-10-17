@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OfferCreate;
 use Inertia\Inertia;
 use App\Models\Offer;
+use App\Events\OfferCreate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
+use App\Events\ExpiredLicense;
 
 class OfferController extends Controller
 {
+
      /**
      * Display a listing of the offer.
      */
@@ -20,12 +21,14 @@ class OfferController extends Controller
                 return [
                     'id' => $offer->id,
                     'description' => $offer->description,
-                    'duration' => ($offer->duration) / (30 * 24 * 60 * 60),
+                    'duration' => ($offer->duration),
+                    // 'duration' => ($offer->duration) / (30 * 24 * 60 * 60),
                     'number_of_users' => $offer->number_of_users
                 ];
             })
         ]);
     }
+
 
     /**
      * Show the form for creating a new offer.
@@ -35,6 +38,7 @@ class OfferController extends Controller
         //
     }
 
+
     /**
      * Store a newly created offer in storage.
      */
@@ -43,12 +47,15 @@ class OfferController extends Controller
         // Validation des données du formulaire
         $validated = $request->validate([
             'description' => 'required|string|max:255',
-            'duration' => 'required|integer|max:36', 
+            'duration' => 'required|integer', 
+            // 'duration' => 'required|integer|max:36', 
             'numberOfUsers' => 'required|integer|max:200'
         ]);
+
         $data = [
             'description' => $validated['description'],
-            'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
+            'duration' => $validated['duration'],
+            // 'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
             'number_of_users' => $validated['numberOfUsers'],
             'created_by' => $request->user()->id,
             'updated_by' => $request->user()->id
@@ -84,6 +91,7 @@ class OfferController extends Controller
         //
     }
 
+    
     /**
      * Update the specified offer in storage.
      */
@@ -92,17 +100,20 @@ class OfferController extends Controller
     
         $validated = $request->validate([
             'description' => 'required|string|max:255',
-            'duration' => 'required|integer|max:36', 
+            'duration' => 'required|integer', 
+            // 'duration' => 'required|integer|max:36', 
             'numberOfUsers' => 'required|integer|max:200'
         ]);
 
         $data = [
             'description' => $validated['description'],
-            'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
+            'duration' => $validated['duration'],
+            // 'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
             'number_of_users' => $validated['numberOfUsers'],
             'updated_by' => $request->user()->id
         ];
 
+        dd($offer);
         $offer->update($data);
 
     }

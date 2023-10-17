@@ -11,26 +11,26 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ExpiredLicense
+class ExpiredLicense implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $license;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(
-        public License $license
-    )
+    public function __construct(License $license)
     {
-        //
+        $this->license = $license;
     }
      
-    public function brodcastWith() : array {
-        return [
-            'id' => $this->license->id,
-            'status' => $this->license->status
-        ];
-    }
+    // public function brodcastWith() : array {
+    //     return [
+    //         'id' => $this->license->id,
+    //         'status' => $this->license->status
+    //     ];
+    // }
 
     /**
      * Get the channels the event should broadcast on.

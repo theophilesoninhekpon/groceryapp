@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ExpiringLicense
+class ExpiringLicense implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -23,14 +23,6 @@ class ExpiringLicense
     public function __construct( License $license)
     {
         $this->license = $license;
-    }
-
-    
-    public function brodcastWith() : array {
-        return [
-            'id' => $this->license->id,
-            'status' => $this->license->status
-        ];
     }
 
     /**

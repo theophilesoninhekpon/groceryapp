@@ -24,3 +24,7 @@ Broadcast::channel('licenseIsExpiring', function ($user) {
 Broadcast::channel('licenseIsExpired', function ($user) {
     return ((int) $user->id) ? true : false;
 });
+
+Broadcast::channel('licenseIsCreated', function ($user) {
+    return ((int) $user->id) ? true : false;
+});

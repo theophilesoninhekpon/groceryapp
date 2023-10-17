@@ -20,6 +20,7 @@ const showEditModal = ref(false);
 const showDetailsModal = ref(false);
 const offerData = ref({});
 const showNotification = ref(false);
+// const showExpiredNotification = ref(false);
 
 // Afficher le modal des détails d'un formulaire
 const showOfferDetails = () => {
@@ -34,24 +35,13 @@ const canShowEditModalForm = () => {
 
 Echo.private(`offers`)
     .listen('OfferCreate', (e) => {
+
         showNotification.value = true;
         setTimeout(() => {
             showNotification.value = false;
         }, 3000);
+        
     });
-
-// Récupération de l'offre
-// const getOfferData = async (id) => {
-//     try {
-//         let response = await axios.get('offers/' + id + '/show');
-//         let data = response.data[0];
-//         offerData.value = data;
-//         console.log(offerData.value);
-//         showOfferDetails();
-//     } catch (error) {
-//         console.log(error); 
-//     }
-// }
 
 /**
  * 

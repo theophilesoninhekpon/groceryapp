@@ -48,6 +48,7 @@ Route::middleware([
     // Routes du CRUD Licenses
     Route::get('/licenses', [LicenseController::class, 'index'])->name('licenses');
     Route::post('/licenses/create', [LicenseController::class, 'store'])->name('licenses.create');
+    Route::patch('/licenses/{license}/update', [LicenseController::class, 'update'])->name('licenses.update');
 
     // Routes du CRUD Tickets
     Route::get('/tickets', function () { return Inertia::render('Dashboard');})->name('tickets');
