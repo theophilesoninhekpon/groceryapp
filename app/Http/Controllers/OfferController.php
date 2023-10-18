@@ -21,8 +21,6 @@ class OfferController extends Controller
                 return [
                     'id' => $offer->id,
                     'description' => $offer->description,
-                    'duration' => ($offer->duration),
-                    // 'duration' => ($offer->duration) / (30 * 24 * 60 * 60),
                     'number_of_users' => $offer->number_of_users
                 ];
             })
@@ -47,15 +45,11 @@ class OfferController extends Controller
         // Validation des données du formulaire
         $validated = $request->validate([
             'description' => 'required|string|max:255',
-            'duration' => 'required|integer', 
-            // 'duration' => 'required|integer|max:36', 
             'numberOfUsers' => 'required|integer|max:200'
         ]);
 
         $data = [
             'description' => $validated['description'],
-            'duration' => $validated['duration'],
-            // 'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
             'number_of_users' => $validated['numberOfUsers'],
             'created_by' => $request->user()->id,
             'updated_by' => $request->user()->id
@@ -76,14 +70,6 @@ class OfferController extends Controller
     }
 
     /**
-     * Retrieve a specified offer.
-     */
-    public function getOffer(Offer $offer)
-    {
-        return Offer::find($offer);
-    }
-
-    /**
      * Show the form for editing the specified offer.
      */
     public function edit(Offer $offer)
@@ -100,20 +86,15 @@ class OfferController extends Controller
     
         $validated = $request->validate([
             'description' => 'required|string|max:255',
-            'duration' => 'required|integer', 
-            // 'duration' => 'required|integer|max:36', 
             'numberOfUsers' => 'required|integer|max:200'
         ]);
 
         $data = [
             'description' => $validated['description'],
-            'duration' => $validated['duration'],
-            // 'duration' => $validated['duration'] * 30 * 24 * 60 * 60,
             'number_of_users' => $validated['numberOfUsers'],
             'updated_by' => $request->user()->id
         ];
 
-        dd($offer);
         $offer->update($data);
 
     }

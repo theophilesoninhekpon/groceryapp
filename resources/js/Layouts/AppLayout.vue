@@ -110,8 +110,8 @@ const logout = () => {
                     Tickets
                     </SideBarNavLink >
                     <SideBarNavLink :active="route().current('superadmin')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
-                        :href="route('superadmin')">
-                    Super Admin
+                        :href="route('users')">
+                    Utilisateurs
                     </SideBarNavLink >
                     <SideBarNavLink :active="route().current('troubleshooting')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('troubleshooting')">

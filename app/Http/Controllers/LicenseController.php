@@ -34,14 +34,12 @@ class LicenseController extends Controller
                     'company' => Tenant::find(DB::table('tenants_has_licenses')->where('licenses_id', '=', $license->id)->pluck('tenants_id'))->pluck('company')[0],
                     'status' => $license->status,
                     'purchased_at' => date_format($license->created_at, 'Y/m/d à H:i:s'),
-                    'expires_at' => $license->expires_at, 
                 ];
             }),
             'offers' => Offer::all(),
             // Les statistiques des licences
-            'ongoing_licenses' => count(License::all()->where('status', '=', 'ACTIVE')->all()),
-            'expiring_licenses' => count(License::all()->where('status', '=', 'EXPIRING')->all()),
-            'expired_licenses' => count(License::all()->where('status', '=', 'INACTIVE')->all())
+            'active_licenses' => count(License::all()->where('status', '=', 'ACTIVE')->all()),
+            'inactive_licenses' => count(License::all()->where('status', '=', 'INACTIVE')->all())
         ]);
 
     }
@@ -87,7 +85,6 @@ class LicenseController extends Controller
             'offers_id' => $data['offer'],
             'status' => 'ACTIVE',
             'access_token' => Crypt::encryptString($data['company']),
-            'expires_at' => Carbon::now()->addSeconds(Offer::find($data['offer'])->duration),
             'created_by' => $request->user()->id,
             'updated_by' => $request->user()->id,
         ];
@@ -174,28 +171,29 @@ class LicenseController extends Controller
         //
     }
 
-    /**
-     * Check expiration date of license
-     */
 
     /**
-     * Update the specified license's offer in storage.
+     * Update the specified license's offer
      */
     public function update(Request $request, int $licenseId)
     {
-        
+
         $license = License::find($licenseId);
 
-        // Mettre à jour la date d'expiration si l'offre changeante est supérieure à l'offre à changer
-        // Mettre à jour la date d'expiration si l'offre changeante est inférieure à l'offre à changer et si il n'a pas encore atteint la date d'expiration de l'offre actuelle
-        // Sinon pas de changement
-        // expires_at = activated_at + duree de l'offre changeante
-
-        // Mettre à jour le nombre d'utilisateurs à créer
-        // Checker le nombre de users dans la base de données du tenant 
-        // Si le nombre de users est inférieur à celui de l'offre changeante, alors on met à jour
-        // Sinon pas de changement
+        $license->update(['offers_id' => $request->offer['id']]);
+        
     }
+
+
+    /**
+     * Update the specified license's status to inactive
+     */
+     public function disable(License $license) {
+
+        $license->update(['status' => 'INACTIVE']);
+
+     }
+
 
     /**
      * Remove the specified license from storage.

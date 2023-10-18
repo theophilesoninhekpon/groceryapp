@@ -108,12 +108,11 @@ const getOfferData = (id) => {
             <!-- Cartes des offres -->
             <div class="flex justify-center flex-wrap gap-x-20 gap-y-5 mt-10 mx-10">
                 <button v-for="offer in offers" class="w-1/4 p-5 rounded-lg shadow-md bg-white hover:bg-red-200 transition-all duration-500" @click="getOfferData(offer.id)">
-                    <div class="items-center flex flex-col items-center">
+                    <div class="flex flex-col items-center">
                         <div class="flex bg-red-400 items-center justify-center p-5 rounded-full shadow-md mb-5">
                             <Icons name="dollar" />
                         </div>
                         <h2 class="text-center text-2xl font-bold text-red-400 mb-5">{{ offer.description }}</h2>
-                        <div class="text-center">{{ offer.duration }} mois</div>
                         <div class="text-center">{{ offer.number_of_users }} utilisateurs</div>
                     </div>
                 </button>

@@ -12,7 +12,6 @@ const emit = defineEmits(['showEditModalForm', 'close']);
 <template>
     <div class="w-4/5 mx-auto flex flex-col mb-5 gap-y-10">
         <h1>Nom: {{ offer.description }}</h1>
-        <p>Durée: {{ offer.duration }} mois</p>
         <p>Nombre d'utilisateurs: {{ offer.number_of_users }}</p>
         <!-- Menu d'édition (Modifier, suppression) -->
         <div class="flex gap-x-2">

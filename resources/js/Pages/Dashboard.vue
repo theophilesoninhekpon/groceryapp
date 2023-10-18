@@ -1,6 +1,15 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Welcome from "@/Components/Welcome.vue";
+
+// Props du composant
+const props = defineProps({
+    licenses: Object,
+    active_licenses: Number,
+    inactive_licenses: Number,
+});
+
+
 </script>
 
 <template>
@@ -12,7 +21,7 @@ import Welcome from "@/Components/Welcome.vue";
             <div
                 class="w-full flex justify-center items-center"
             >
-                <Welcome />
+                <Welcome :licensesData="props"/>
             </div>
         </div>
     </AppLayout>

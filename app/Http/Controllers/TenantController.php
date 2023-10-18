@@ -3,43 +3,79 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Offer;
 use App\Models\Tenant;
+use App\Models\License;
 use Illuminate\Http\Request;
-use Stancl\Tenancy\Database\Models\Domain;
+use Illuminate\Support\Facades\DB;
 
 class TenantController extends Controller
 {
-
-    // Afficher tous les clients déjà enregistrés
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return Inertia::render('Tenants');
+        return Inertia::render('Client', [
+            'clients' =>  Tenant::all()->transform(function ($tenant) {
+                return [
+                    'id' => $tenant->id,
+                    'company' => $tenant->company,
+                    'offer' => Offer::find(License::find(DB::table('tenants_has_licenses')->where('tenants_id', '=', $tenant->id)->pluck('licenses_id')))->pluck('description')[0],
+                    'status' => License::find(DB::table('tenants_has_licenses')->where('tenants_id', '=', $tenant->id)->pluck('licenses_id'))->pluck('status')[0],
+                    'database' => $tenant->tenancy_db_name,
+                    'domain' => $tenant->domains()->pluck('domain')[0]
+                ];
+            })
+        ]);
+    }
+
+    // 'company' offer status database domain
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
     /**
-     * Enregistre un client avec sa base de donnée et son domaine
-    */
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
+        //
+    }
 
-        // Vérifier la validité des données reçues du formulaire
-        $validated = $request->validate([
-            'offers_id' => 'required|integer',
-            'company' => 'required|string|max:255',
-        ]);
+    /**
+     * Display the specified resource.
+     */
+    public function show(Tenant $tenant)
+    {
+        //
+    }
 
-        $data = array_merge($validated, [
-            'created_by' => $request->user()->id,
-            'updated_by' => $request->user()->id
-        ]);
-        $tenant = Tenant::create($data);
-        
-        
-        // Création du domaine du client
-        // $databaseName = 'tenant'.substr(UUIDGenerator::generate(''),0,10);
-        $i = 0;
-        $i++;
-        $domainName = 'tenant' . $i . '.' . config('tenancy.central_domains')[0];
-        $domain = $tenant->domains()->create(['domain' => $domainName]);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Tenant $tenant)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Tenant $tenant)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Tenant $tenant)
+    {
+        //
     }
 }

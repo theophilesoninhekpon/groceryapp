@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->bigInteger('duration');
-            $table->integer('number_of_users')->default(0);
-            $table->integer('created_by')->default(0);
-            $table->integer('updated_by')->default(0);
+            $table->integer('number_of_users');
+            $table->integer('created_by');
+            $table->integer('updated_by');
             $table->timestamps();
         });
     }

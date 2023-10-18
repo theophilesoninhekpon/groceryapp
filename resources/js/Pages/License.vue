@@ -13,34 +13,18 @@ import { router } from "@inertiajs/vue3";
 const props = defineProps({
     licenses: Object,
     offers: Object,
-    ongoing_licenses: Number,
-    expiring_licenses: Number,
-    expired_licenses: Number,
+    active_licenses: Number,
+    inactive_licenses: Number,
 });
 
 // const licensesData = ref(props.licenses);
 const showModal = ref(false);
 const showOffersModal = ref(false);
 const availableOffers = ref({});
-const showExpiredNotification = ref(false);
-const showExpiringNotification = ref(false);
-const ongoingLicensesNumber = ref(0);
-const expiringLicensesNumber = ref(0);
-const expiredLicensesNumber = ref(0);
 const idOfLicenseToUpdate = ref(0);
 
 
 // const emit = defineEmits(["closeOffersModal"]);
-
-
-// Au chargement du composant
-onMounted(() => {
-
-    ongoingLicensesNumber.value = props.ongoing_licenses;
-    expiringLicensesNumber.value = props.expiring_licenses;
-    expiredLicensesNumber.value = props.expired_licenses;
-
-})
 
 
 /**
@@ -72,51 +56,18 @@ const changeLicenseOffer = (offer) => {
 
     router.patch(route('licenses.update', idOfLicenseToUpdate.value), {offer: offer});
 
+    showOffersModal.value = false;
+    
 }
 
-// Gestion des données reçues au broadcast d'une licence créée
-Echo.private(`licenseIsCreated`)
-    .listen('LicenseCreated', (e) => {
+/**
+ * Fonction de désactivation d'une licence
+ * */ 
+const disableLicense = (license) => {
 
-        ongoingLicensesNumber.value = props.licenses.filter((license) => license.status === 'ACTIVE').length;
+    router.patch(route('licenses.disable', license));
 
-    });
-
-
-// Gestion des données reçues au broadcast d'une licence à terme
-Echo.private(`licenseIsExpiring`)
-    .listen('ExpiringLicense', (e) => {
-
-        let expiringLicense = e.license;
-
-        props.licenses.map((license) => {
-            if (license.id === expiringLicense.id) {
-                license.status = expiringLicense.status;
-            }
-        });
-
-        expiringLicensesNumber.value = props.licenses.filter((license) => license.status === 'EXPIRING').length;
-
-    });
-
-
-// Gestion des données reçues au broadcast d'une licence expirée
-Echo.private(`licenseIsExpired`)
-    .listen('ExpiredLicense', (e) => {
-
-        let expiredLicense = e.license;
-
-        props.licenses.map((license) => {
-            if (license.id === expiredLicense.id) {
-                license.status = expiredLicense.status;
-            }
-        });
-
-        ongoingLicensesNumber.value = props.licenses.filter((license) => license.status === 'ACTIVE').length;
-        expiringLicensesNumber.value = props.licenses.filter((license) => license.status === 'EXPIRING').length;
-        expiredLicensesNumber.value = props.licenses.filter((license) => license.status === 'INACTIVE').length;
-
-    });
+}
 
 
 
@@ -140,9 +91,9 @@ Echo.private(`licenseIsExpired`)
             <div class="w-full flex justify-center items-center">
                 <!-- Affichage des statistiques de licences en card -->
 
-                <div class="w-4/5 flex justify-center gap-x-10 gap-y-5 mt-10 ">
+                <div class="w-full mx-28 flex justify-around gap-x-14 gap-y-5 mt-4 ">
                     <div
-                        class="w-1/4 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
+                        class="w-1/3 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
                         <div class="w-1/2">
                             <Icons name="license" />
                         </div>
@@ -153,38 +104,26 @@ Echo.private(`licenseIsExpired`)
                     </div>
 
                     <div
-                        class=" w-1/4 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
+                        class=" w-1/3 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
                         <div class="w-1/2">
                             <Icons name="valid" />
                         </div>
                         <div class="w-1/2 flex flex-col items-end justify-center gap-y-2 text-zinc-700">
-                            <div>En cours</div>
+                            <div>Actives</div>
                             <div class="text-5xl">
-                                {{ ongoingLicensesNumber }}
+                                {{ active_licenses }}
                             </div>
                         </div>
                     </div>
                     <div
-                        class=" w-1/4 bg-white px-8 py-10 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
-                        <div class="w-1/2">
-                            <Icons name="hourglass-middle" />
-                        </div>
-                        <div class="w-1/2 flex flex-col items-end justify-center gap-y-2 text-zinc-700">
-                            <div>A terme</div>
-                            <div class="text-5xl">
-                                {{ expiringLicensesNumber }}
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class=" w-1/4 bg-white px-8 py-10 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
+                        class=" w-1/3 bg-white px-8 py-10 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
                         <div class="w-1/2">
                             <Icons name="hourglass-end" />
                         </div>
                         <div class="w-1/2 flex flex-col items-end justify-center gap-y-2 text-zinc-700">
-                            <div>Expirées</div>
+                            <div>Inactives</div>
                             <div class="text-5xl">
-                                {{ expiredLicensesNumber }}
+                                {{ inactive_licenses }}
                             </div>
                         </div>
                     </div>
@@ -215,7 +154,7 @@ Echo.private(`licenseIsExpired`)
                 </div>
             </ModalForm>
 
-            <div class="mt-10 mx-28 board-container overflow-auto">
+            <div class=" mt-10 mx-28 board-container"> <!-- ajouter overflow-auto -->
                 <table class="border-gray-200 border-2 w-full shadow-sm rounded-md">
                     <tr class="border-gray-200 border-2 p-3 text-center">
                         <th class="border-gray-200 border-2 px-3 py-3">N°</th>
@@ -223,7 +162,6 @@ Echo.private(`licenseIsExpired`)
                         <th class="border-gray-200 border-2 px-3 py-3">Client</th>
                         <th class="border-gray-200 border-2 px-3 py-3">Statut</th>
                         <th class="border-gray-200 border-2 px-3 py-3">Activée le</th>
-                        <th class="border-gray-200 border-2 px-3 py-3">Expire le</th>
                         <th class="border-gray-200 border-2 py-3">Action</th>
                         <!-- <th class="border-gray-200 border-2 px-3 py-3"></th> -->
                     </tr>
@@ -243,9 +181,6 @@ Echo.private(`licenseIsExpired`)
                         <td class="border-gray-200 border-2 px-3 py-3">
                             {{ license.purchased_at }}
                         </td>
-                        <td class="border-gray-200 border-2 px-3 py-3">
-                            {{ license.expires_at }}
-                        </td>
                         <!-- <td class="border-gray-200 border-2 p-3"></td> -->
                         <td class="border-gray-200 border-2 py-3 flex justify-center">
                             <Dropdown class="ring-0">
@@ -258,17 +193,11 @@ Echo.private(`licenseIsExpired`)
                                     <DropdownLink as="button" @click="getOffers(license)">
                                         Changer d'offre
                                     </DropdownLink>
-                                    <DropdownLink as="button">
+                                    <DropdownLink as="button" @click="disableLicense(license)">
                                         Désactiver
-                                    </DropdownLink>
-                                    <DropdownLink as="button">
-                                        Renouveler
                                     </DropdownLink>
                                 </template>
                             </Dropdown>
-                            <!-- <button class="py-2 px-5 bg-green-500 rounded-md text-white " @click="getOffers(license.offer)">
-                                Changer d'offre
-                            </button> -->
                         </td>
                     </tr>
                 </table>
