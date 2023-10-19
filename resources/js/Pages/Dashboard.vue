@@ -4,7 +4,7 @@ import Welcome from "@/Components/Welcome.vue";
 
 // Props du composant
 const props = defineProps({
-    licenses: Object,
+    licenses: Number,
     active_licenses: Number,
     inactive_licenses: Number,
 });

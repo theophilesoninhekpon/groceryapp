@@ -58,7 +58,7 @@ abstract class Renderer
      */
     protected function error(string $message): self
     {
-        return $this->line($this->red("  ⚠ {$message}"));
+        return $this->line($this->orange("  ⚠ {$message}"));
     }
 
     /**

@@ -60,14 +60,14 @@ class RouteListCommand extends Command
      * @var array
      */
     protected $verbColors = [
-        'ANY' => 'red',
+        'ANY' => 'orange',
         'GET' => 'blue',
         'HEAD' => '#6C7280',
         'OPTIONS' => '#6C7280',
         'POST' => 'yellow',
         'PUT' => 'yellow',
         'PATCH' => 'yellow',
-        'DELETE' => 'red',
+        'DELETE' => 'orange',
     ];
 
     /**

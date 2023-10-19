@@ -352,12 +352,12 @@ final class ProgressPrinter
 
     private function printProgressForFailure(): void
     {
-        $this->printProgressWithColor('bg-red, fg-white', 'F');
+        $this->printProgressWithColor('bg-orange, fg-white', 'F');
     }
 
     private function printProgressForError(): void
     {
-        $this->printProgressWithColor('fg-red, bold', 'E');
+        $this->printProgressWithColor('fg-orange, bold', 'E');
     }
 
     private function printProgressWithColor(string $color, string $progress): void

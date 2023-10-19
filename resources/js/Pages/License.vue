@@ -93,7 +93,7 @@ const disableLicense = (license) => {
 
                 <div class="w-full mx-28 flex justify-around gap-x-14 gap-y-5 mt-4 ">
                     <div
-                        class="w-1/3 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
+                        class="w-1/3 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-orange-400 font-bold shadow-md flex items-center justify-between space-x-10">
                         <div class="w-1/2">
                             <Icons name="license" />
                         </div>
@@ -104,7 +104,7 @@ const disableLicense = (license) => {
                     </div>
 
                     <div
-                        class=" w-1/3 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
+                        class=" w-1/3 bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-orange-400 font-bold shadow-md flex items-center justify-between space-x-10">
                         <div class="w-1/2">
                             <Icons name="valid" />
                         </div>
@@ -116,7 +116,7 @@ const disableLicense = (license) => {
                         </div>
                     </div>
                     <div
-                        class=" w-1/3 bg-white px-8 py-10 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between space-x-10">
+                        class=" w-1/3 bg-white px-8 py-10 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-orange-400 font-bold shadow-md flex items-center justify-between space-x-10">
                         <div class="w-1/2">
                             <Icons name="hourglass-end" />
                         </div>
@@ -147,7 +147,7 @@ const disableLicense = (license) => {
                     <h2 class="text-center text-3xl font-bold mb-8">Offres</h2>
                     <div class="flex flex-col items-center gap-y-3">
                         <button v-for="offer in availableOffers" type="button"
-                            class="w-2/5 bg-red-400 px-3 py-2 rounded-md shadow-sm" @click="changeLicenseOffer(offer)">
+                            class="w-2/5 bg-orange-400 px-3 py-2 rounded-md shadow-sm" @click="changeLicenseOffer(offer)">
                             {{ offer.description }}
                         </button>
                     </div>

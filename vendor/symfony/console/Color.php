@@ -20,7 +20,7 @@ final class Color
 {
     private const COLORS = [
         'black' => 0,
-        'red' => 1,
+        'orange' => 1,
         'green' => 2,
         'yellow' => 3,
         'blue' => 4,
@@ -32,7 +32,7 @@ final class Color
 
     private const BRIGHT_COLORS = [
         'gray' => 0,
-        'bright-red' => 1,
+        'bright-orange' => 1,
         'bright-green' => 2,
         'bright-yellow' => 3,
         'bright-blue' => 4,

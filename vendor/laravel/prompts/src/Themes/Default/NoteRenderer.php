@@ -33,7 +33,7 @@ class NoteRenderer extends Renderer
                 return $this;
 
             case 'error':
-                $lines->each(fn ($line) => $this->line($this->red(" {$line}")));
+                $lines->each(fn ($line) => $this->line($this->orange(" {$line}")));
 
                 return $this;
 

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('offers_id');
             $table->enum('status', ['ACTIVE', 'INACTIVE']);
             $table->string('access_token')->nullable();
-            $table->integer('created_by')->default(0);
-            $table->integer('updated_by')->default(0);
+            $table->integer('created_by');
+            $table->integer('updated_by');
             $table->timestamps();
         });
     }

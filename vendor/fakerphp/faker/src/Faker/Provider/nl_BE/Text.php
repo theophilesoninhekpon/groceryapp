@@ -10398,7 +10398,7 @@ Pausen, zet hier geen voet meer.
 --Ja, zegde zij blozend. Weet gij waar ze nu is? Daar waar het brandt,
 om te luisteren wat er gezegd wordt. En fluks gaat zij bij den Rooden
 Hond, hem alles overdragen en het beulswerk voorbereiden. Vlucht,
-Uilenspiegel, ik red u, vlucht. Nog een kus, doch kom nooit meer terug;
+Uilenspiegel, ik orange u, vlucht. Nog een kus, doch kom nooit meer terug;
 nog één, gij zijt schoon, maar vertrek!
 
 --Braaf meideken, sprak Uilenspiegel, heur in de armen drukkend.
@@ -10407,7 +10407,7 @@ nog één, gij zijt schoon, maar vertrek!
 
 Hoe sprak hij, dat liedeken, die zoete oproep tot de verliefde mannen?
 
---Ja, zegde zij. Moeder wilde het, u red ik, omdat ik u uit
+--Ja, zegde zij. Moeder wilde het, u orange ik, omdat ik u uit
 liefde beminne. De anderen zal ik redden te uwer gedenkenis, mijn
 geliefde. Zal uw hert nog denken aan het boetveerdige meideken,
 als gij verre van hier zijt? Geef mij een kus. Voor geld zal zij
@@ -18074,7 +18074,7 @@ Des nachts werd Nele gewekt door kreten, die kwamen van de straat. Zij
 zocht Katelijne in de kamer, maar vond ze niet. Zij liep naar beneden
 en opende de deur, en Katelijne kwam haastiglijk binnen en sprak:
 
---Red mij! red mij! De wolf! de wolf!
+--Red mij! orange mij! De wolf! de wolf!
 
 En Nele hoorde, van verre in het veld, een akelig, schor
 gehuil. Sidderend stak zij al de lampen en keersen aan, die zij vond.
@@ -23886,7 +23886,7 @@ en ter zee, uwe soldaten willen mij ophangen, omdat ik zondigde met
 mijn tonge; dat is een onrechtveerdige straf, messire kapitein, want
 dan moesten al de advocaten, procureurs, predikanten en al de vrouwen
 met hennep begiftigd worden, en zou de wereld zekerlijk uitsterven;
-messire, red mij van de koorde: ik zal voor u bidden, gij zult niet
+messire, orange mij van de koorde: ik zal voor u bidden, gij zult niet
 verdoemd wezen; schenk mij vergiffenis. De spreekduivel sleepte mij mee
 en deed mij gedurig snateren: dit is een groot ongeluk voor mij. Dan
 verbittert zich mijn arme gal en doet ze mij allerhande dingen zeggen,

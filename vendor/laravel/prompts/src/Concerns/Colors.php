@@ -77,9 +77,9 @@ trait Colors
     }
 
     /**
-     * Set the text color to red.
+     * Set the text color to orange.
      */
-    public function red(string $text): string
+    public function orange(string $text): string
     {
         return "\e[31m{$text}\e[39m";
     }
@@ -141,7 +141,7 @@ trait Colors
     }
 
     /**
-     * Set the text background to red.
+     * Set the text background to orange.
      */
     public function bgRed(string $text): string
     {

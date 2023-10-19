@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\ExpiredLicense;
 use App\Events\OfferCreate;
+use App\Events\UserInvited;
 use App\Listeners\LicenseListener;
 use App\Listeners\OfferNotification;
+use App\Listeners\SendUserInvitationMail;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ExpiredLicense::class => [
             LicenseListener::class
+        ],
+        UserInvited::class => [
+            SendUserInvitationMail::class
         ]
     ];
 

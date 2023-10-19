@@ -218,7 +218,7 @@ final class ResultPrinter
                 $message[] = $line;
             } else {
                 if (str_starts_with($line, '-')) {
-                    $line = Color::colorize('fg-red', Color::visualizeWhitespace($line, true));
+                    $line = Color::colorize('fg-orange', Color::visualizeWhitespace($line, true));
                 } elseif (str_starts_with($line, '+')) {
                     $line = Color::colorize('fg-green', Color::visualizeWhitespace($line, true));
                 } elseif ($line === '@@ @@') {
@@ -310,7 +310,7 @@ final class ResultPrinter
         }
 
         if ($status->isFailure()) {
-            return 'fg-red';
+            return 'fg-orange';
         }
 
         if ($status->isSkipped()) {
@@ -335,7 +335,7 @@ final class ResultPrinter
         }
 
         if ($status->isFailure()) {
-            return 'bg-red,fg-white';
+            return 'bg-orange,fg-white';
         }
 
         if ($status->isSkipped()) {

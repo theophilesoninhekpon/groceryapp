@@ -12,7 +12,7 @@ defineProps({
 
     <div class="flex justify-center gap-10 mx-10">
         <div
-            class="bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between gap-x-72">
+            class="bg-white px-8 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-orange-400 font-bold shadow-md flex items-center justify-between gap-x-72">
             <div>
                 <Icons name="license"/>
             </div>
@@ -23,7 +23,7 @@ defineProps({
         </div>
 
         <div
-            class="bg-white px-8 rounded-md hover:scale-110 transition duration-700  hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between gap-x-72">
+            class="bg-white px-8 rounded-md hover:scale-110 transition duration-700  hover:text-gray-700 text-orange-400 font-bold shadow-md flex items-center justify-between gap-x-72">
             <div>
                 <Icons name="valid"/>
             </div>
@@ -34,7 +34,7 @@ defineProps({
         </div>
     
         <div
-            class="bg-white px-8 py-10 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-red-400 font-bold shadow-md flex items-center justify-between gap-x-72">
+            class="bg-white px-8 py-10 rounded-md hover:scale-110 transition duration-700 hover:text-gray-700 text-orange-400 font-bold shadow-md flex items-center justify-between gap-x-72">
             <div>
                 <Icons name="hourglass-end" />
             </div>

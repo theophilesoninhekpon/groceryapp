@@ -18,7 +18,7 @@ const emit = defineEmits(['showEditModalForm', 'close']);
             <button @click="emit('showEditModalForm')" class="w-1/2 text-center bg-green-500 py-2 rounded-md text-white">
             Modifier
             </button>
-            <Link as="button" @click="emit('close')" :href="route('offers.delete', offer)" method="delete" class="w-1/2 text-center bg-red-500  py-2 rounded-md text-white">
+            <Link as="button" @click="emit('close')" :href="route('offers.delete', offer)" method="delete" class="w-1/2 text-center bg-orange-500  py-2 rounded-md text-white">
             Supprimer
             </Link>
         </div>

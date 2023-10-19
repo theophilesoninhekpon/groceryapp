@@ -21,10 +21,10 @@ const props = defineProps({
     </svg>
 
     <!-- User -->
-    <svg v-else-if="name === 'user'" xmlns="http://www.w3.org/2000/svg" fill="#f87171" viewBox="0 0 24 24" stroke-width="1"
-        stroke="#f3f4f6" class="w-12 h-12">
-        <path stroke-linecap="round" stroke-linejoin="round"
-            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+    <svg v-else-if="name === 'user'" xmlns="http://www.w3.org/2000/svg" height="1em"
+        viewBox="0 0 512 512" class="w-10 h-10" fill="#ffffff">
+        <path
+            d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
     </svg>
 
     <!-- Caret Navigation -->
@@ -76,8 +76,8 @@ const props = defineProps({
             d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
     </svg>
 
-    <!-- Save red -->
-    <svg v-else-if="name === 'save-red-400'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4"
+    <!-- Save orange -->
+    <svg v-else-if="name === 'save-orange-400'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4"
         fill="#f87171">
         <path
             d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
@@ -131,5 +131,4 @@ const props = defineProps({
         stroke="#dc2626" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round"
             d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-    </svg>
-</template>
+</svg></template>

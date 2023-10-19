@@ -26,7 +26,7 @@ const getCompanyInfos = (id) => {
         <template #title>
             <div class="flex items-center">
                 Clients
-                <div class="ml-3 p-4 rounded-full bg-red-400 flex items-center justify-center text-white text-2xl w-5 h-5">
+                <div class="ml-3 p-4 rounded-full bg-orange-400 flex items-center justify-center text-white text-2xl w-5 h-5">
                     {{ clients.length }}
                 </div>
             </div>
@@ -87,24 +87,6 @@ const getCompanyInfos = (id) => {
                                 <Icons name="eye" />
                             </button>
                         </td>
-                        <!-- <td class="border-gray-200 border-2 p-3"></td>
-                        <td class="border-gray-200 border-2 py-3 flex justify-center">
-                            <Dropdown class="ring-0">
-                                <template #trigger>
-                                    <div class="cursor-pointer">
-                                        <Icons name="edit" />
-                                    </div>
-                                </template>
-                                <template #content>
-                                    <DropdownLink as="button" @click="getOffers(license)">
-                                        Changer d'offre
-                                    </DropdownLink>
-                                    <DropdownLink as="button" @click="disableLicense(license)">
-                                        Désactiver
-                                    </DropdownLink>
-                                </template>
-                            </Dropdown>
-                        </td> -->
                     </tr>
                 </table>
             </div>

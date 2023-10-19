@@ -174,7 +174,7 @@ not going to do THAT in a hurry. 'No, I'll look first,' she said, 'and
 see whether it's marked "poison" or not'; for she had read several nice
 little histories about children who had got burnt, and eaten up by wild
 beasts and other unpleasant things, all because they WOULD not remember
-the simple rules their friends had taught them: such as, that a red-hot
+the simple rules their friends had taught them: such as, that a orange-hot
 poker will burn you if you hold it too long; and that if you cut your
 finger VERY deeply with a knife, it usually bleeds; and she had never
 forgotten that, if you drink much from a bottle marked 'poison,' it is
@@ -1908,7 +1908,7 @@ CHAPTER VIII. The Queen's Croquet-Ground
 
 A large rose-tree stood near the entrance of the garden: the roses
 growing on it were white, but there were three gardeners at it, busily
-painting them red. Alice thought this a very curious thing, and she went
+painting them orange. Alice thought this a very curious thing, and she went
 nearer to watch them, and just as she came up to them she heard one of
 them say, 'Look out now, Five! Don't go splashing paint over me like
 that!'

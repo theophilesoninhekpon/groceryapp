@@ -50,7 +50,7 @@ class Task extends Component
             $this->output->write("<fg=gray>$runTime</>", false, $verbosity);
 
             $this->output->writeln(
-                $result !== false ? ' <fg=green;options=bold>DONE</>' : ' <fg=red;options=bold>FAIL</>',
+                $result !== false ? ' <fg=green;options=bold>DONE</>' : ' <fg=orange;options=bold>FAIL</>',
                 $verbosity,
             );
         }

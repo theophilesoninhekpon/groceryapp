@@ -146,7 +146,7 @@ class SymfonyStyle extends OutputStyle
      */
     public function error(string|array $message)
     {
-        $this->block($message, 'ERROR', 'fg=white;bg=red', ' ', true);
+        $this->block($message, 'ERROR', 'fg=white;bg=orange', ' ', true);
     }
 
     /**
@@ -180,7 +180,7 @@ class SymfonyStyle extends OutputStyle
      */
     public function caution(string|array $message)
     {
-        $this->block($message, 'CAUTION', 'fg=white;bg=red', ' ! ', true);
+        $this->block($message, 'CAUTION', 'fg=white;bg=orange', ' ! ', true);
     }
 
     /**

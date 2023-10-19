@@ -57,7 +57,7 @@ class OfferController extends Controller
         
         $offer = Offer::create($data);
         
-        event(new OfferCreate($offer));
+        // event(new OfferCreate($offer));
 
     }
 

@@ -28,9 +28,9 @@ const onOutHover = () => {
 </script>
 
 <template>
-    <button type="type" @mouseover="onHover" @mouseout="onOutHover" :disabled="disabled" class="transition-all duration-200 cursor-pointer flex gap-x-2 items-center shadow-md border-2 border-red-400 border-gray-700 rounded-lg bg-red-400 px-6 py-3 text-white hover:border-2 hover:border-red-400 hover:bg-white hover:text-red-400">
+    <button type="type" @mouseover="onHover" @mouseout="onOutHover" :disabled="disabled" class="transition-all duration-200 cursor-pointer flex gap-x-2 items-center shadow-md border-2 border-orange-400 border-gray-700 rounded-lg bg-orange-400 px-6 py-3 text-white hover:border-2 hover:border-orange-400 hover:bg-white hover:text-orange-400">
             {{ name }}
-            <Icons v-if="hover" name="save-red-400"/>
+            <Icons v-if="hover" name="save-orange-400"/>
             <Icons v-else="noHover" name="save-white" />
     </button>
 </template>

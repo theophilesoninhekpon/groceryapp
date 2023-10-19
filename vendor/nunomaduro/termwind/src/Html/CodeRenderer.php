@@ -49,7 +49,7 @@ final class CodeRenderer
         self::TOKEN_DEFAULT => 'strong',
         self::TOKEN_HTML => 'text-blue strong',
 
-        self::ACTUAL_LINE_MARK => 'text-red strong',
+        self::ACTUAL_LINE_MARK => 'text-orange strong',
         self::LINE_NUMBER => 'text-gray',
         self::MARKED_LINE_NUMBER => 'italic strong',
         self::LINE_NUMBER_DIVIDER => 'text-gray',

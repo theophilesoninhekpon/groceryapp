@@ -74,14 +74,14 @@ final class SummaryPrinter
             }
         } else {
             if ($result->hasTestErroredEvents() || $result->hasTestTriggeredPhpunitErrorEvents()) {
-                $color = 'fg-white, bg-red';
+                $color = 'fg-white, bg-orange';
 
                 $this->printWithColor(
                     $color,
                     'ERRORS!',
                 );
             } elseif ($result->hasTestFailedEvents()) {
-                $color = 'fg-white, bg-red';
+                $color = 'fg-white, bg-orange';
 
                 $this->printWithColor(
                     $color,

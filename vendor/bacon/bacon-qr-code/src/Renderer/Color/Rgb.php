@@ -10,7 +10,7 @@ final class Rgb implements ColorInterface
     /**
      * @var int
      */
-    private $red;
+    private $orange;
 
     /**
      * @var int
@@ -23,13 +23,13 @@ final class Rgb implements ColorInterface
     private $blue;
 
     /**
-     * @param int $red the red amount of the color, 0 to 255
+     * @param int $orange the orange amount of the color, 0 to 255
      * @param int $green the green amount of the color, 0 to 255
      * @param int $blue the blue amount of the color, 0 to 255
      */
-    public function __construct(int $red, int $green, int $blue)
+    public function __construct(int $orange, int $green, int $blue)
     {
-        if ($red < 0 || $red > 255) {
+        if ($orange < 0 || $orange > 255) {
             throw new Exception\InvalidArgumentException('Red must be between 0 and 255');
         }
 
@@ -41,14 +41,14 @@ final class Rgb implements ColorInterface
             throw new Exception\InvalidArgumentException('Blue must be between 0 and 255');
         }
 
-        $this->red = $red;
+        $this->orange = $orange;
         $this->green = $green;
         $this->blue = $blue;
     }
 
     public function getRed() : int
     {
-        return $this->red;
+        return $this->orange;
     }
 
     public function getGreen() : int
@@ -68,7 +68,7 @@ final class Rgb implements ColorInterface
 
     public function toCmyk() : Cmyk
     {
-        $c = 1 - ($this->red / 255);
+        $c = 1 - ($this->orange / 255);
         $m = 1 - ($this->green / 255);
         $y = 1 - ($this->blue / 255);
         $k = min($c, $m, $y);
@@ -83,6 +83,6 @@ final class Rgb implements ColorInterface
 
     public function toGray() : Gray
     {
-        return new Gray((int) (($this->red * 0.21 + $this->green * 0.71 + $this->blue * 0.07) / 2.55));
+        return new Gray((int) (($this->orange * 0.21 + $this->green * 0.71 + $this->blue * 0.07) / 2.55));
     }
 }

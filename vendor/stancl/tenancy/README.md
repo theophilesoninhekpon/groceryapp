@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-    <a href="https://laravel.com"><img alt="Laravel 10.x" src="https://img.shields.io/badge/laravel-10.x-red.svg"></a>
+    <a href="https://laravel.com"><img alt="Laravel 10.x" src="https://img.shields.io/badge/laravel-10.x-orange.svg"></a>
     <a href="https://packagist.org/packages/stancl/tenancy"><img alt="Latest Stable Version" src="https://poser.pugx.org/stancl/tenancy/version"></a>
     <a href="https://github.com/stancl/tenancy/actions"><img alt="GitHub Actions CI status" src="https://github.com/stancl/tenancy/workflows/CI/badge.svg"></a>
-    <a href="https://github.com/stancl/tenancy/blob/3.x/DONATIONS.md"><img alt="Donate" src="https://img.shields.io/badge/Donate-%3C3-red"></a>
+    <a href="https://github.com/stancl/tenancy/blob/3.x/DONATIONS.md"><img alt="Donate" src="https://img.shields.io/badge/Donate-%3C3-orange"></a>
 </p>
 
 <h1><a href="https://tenancyforlaravel.com">Tenancy for Laravel &mdash; stancl/tenancy</a></h1>

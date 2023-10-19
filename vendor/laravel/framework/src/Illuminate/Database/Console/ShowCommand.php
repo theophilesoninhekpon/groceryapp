@@ -20,8 +20,8 @@ class ShowCommand extends DatabaseInspectionCommand
      */
     protected $signature = 'db:show {--database= : The database connection}
                 {--json : Output the database information as JSON}
-                {--counts : Show the table row count <bg=red;options=bold> Note: This can be slow on large databases </>};
-                {--views : Show the database views <bg=red;options=bold> Note: This can be slow on large databases </>}';
+                {--counts : Show the table row count <bg=orange;options=bold> Note: This can be slow on large databases </>};
+                {--views : Show the database views <bg=orange;options=bold> Note: This can be slow on large databases </>}';
 
     /**
      * The console command description.

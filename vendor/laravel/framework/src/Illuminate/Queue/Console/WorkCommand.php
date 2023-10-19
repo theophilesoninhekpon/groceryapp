@@ -229,7 +229,7 @@ class WorkCommand extends Command
         $this->output->writeln(match ($status) {
             'success' => ' <fg=green;options=bold>DONE</>',
             'released_after_exception' => ' <fg=yellow;options=bold>FAIL</>',
-            default => ' <fg=red;options=bold>FAIL</>',
+            default => ' <fg=orange;options=bold>FAIL</>',
         });
     }
 

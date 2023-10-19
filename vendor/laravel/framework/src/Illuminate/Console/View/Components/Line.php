@@ -24,7 +24,7 @@ class Line extends Component
             'title' => 'warn',
         ],
         'error' => [
-            'bgColor' => 'red',
+            'bgColor' => 'orange',
             'fgColor' => 'white',
             'title' => 'error',
         ],

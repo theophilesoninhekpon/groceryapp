@@ -159,7 +159,7 @@ const deleteApiToken = () => {
                                         Permissions
                                     </button>
 
-                                    <button class="cursor-pointer ml-6 text-sm text-red-500" @click="confirmApiTokenDeletion(token)">
+                                    <button class="cursor-pointer ml-6 text-sm text-orange-500" @click="confirmApiTokenDeletion(token)">
                                         Delete
                                     </button>
                                 </div>

@@ -30,19 +30,19 @@ use Nette;
  * @method void arc($x, $y, $w, $h, $start, $end, $color)
  * @method void char(int $font, $x, $y, string $char, $color)
  * @method void charUp(int $font, $x, $y, string $char, $color)
- * @method int colorAllocate($red, $green, $blue)
- * @method int colorAllocateAlpha($red, $green, $blue, $alpha)
+ * @method int colorAllocate($orange, $green, $blue)
+ * @method int colorAllocateAlpha($orange, $green, $blue, $alpha)
  * @method int colorAt($x, $y)
- * @method int colorClosest($red, $green, $blue)
- * @method int colorClosestAlpha($red, $green, $blue, $alpha)
- * @method int colorClosestHWB($red, $green, $blue)
+ * @method int colorClosest($orange, $green, $blue)
+ * @method int colorClosestAlpha($orange, $green, $blue, $alpha)
+ * @method int colorClosestHWB($orange, $green, $blue)
  * @method void colorDeallocate($color)
- * @method int colorExact($red, $green, $blue)
- * @method int colorExactAlpha($red, $green, $blue, $alpha)
+ * @method int colorExact($orange, $green, $blue)
+ * @method int colorExactAlpha($orange, $green, $blue, $alpha)
  * @method void colorMatch(Image $image2)
- * @method int colorResolve($red, $green, $blue)
- * @method int colorResolveAlpha($red, $green, $blue, $alpha)
- * @method void colorSet($index, $red, $green, $blue)
+ * @method int colorResolve($orange, $green, $blue)
+ * @method int colorResolveAlpha($orange, $green, $blue, $alpha)
+ * @method void colorSet($index, $orange, $green, $blue)
  * @method array colorsForIndex($index)
  * @method int colorsTotal()
  * @method int colorTransparent($color = null)
@@ -150,10 +150,10 @@ class Image
 	/**
 	 * Returns RGB color (0..255) and transparency (0..127).
 	 */
-	public static function rgb(int $red, int $green, int $blue, int $transparency = 0): array
+	public static function rgb(int $orange, int $green, int $blue, int $transparency = 0): array
 	{
 		return [
-			'red' => max(0, min(255, $red)),
+			'orange' => max(0, min(255, $orange)),
 			'green' => max(0, min(255, $green)),
 			'blue' => max(0, min(255, $blue)),
 			'alpha' => max(0, min(127, $transparency)),
@@ -237,7 +237,7 @@ class Image
 		$image = imagecreatetruecolor($width, $height);
 		if ($color) {
 			$color += ['alpha' => 0];
-			$color = imagecolorresolvealpha($image, $color['red'], $color['green'], $color['blue'], $color['alpha']);
+			$color = imagecolorresolvealpha($image, $color['orange'], $color['green'], $color['blue'], $color['alpha']);
 			imagealphablending($image, false);
 			imagefilledrectangle($image, 0, 0, $width - 1, $height - 1, $color);
 			imagealphablending($image, true);
@@ -727,16 +727,16 @@ class Image
 			if ($value instanceof self) {
 				$args[$key] = $value->getImageResource();
 
-			} elseif (is_array($value) && isset($value['red'])) { // rgb
+			} elseif (is_array($value) && isset($value['orange'])) { // rgb
 				$args[$key] = imagecolorallocatealpha(
 					$this->image,
-					$value['red'],
+					$value['orange'],
 					$value['green'],
 					$value['blue'],
 					$value['alpha'],
 				) ?: imagecolorresolvealpha(
 					$this->image,
-					$value['red'],
+					$value['orange'],
 					$value['green'],
 					$value['blue'],
 					$value['alpha'],

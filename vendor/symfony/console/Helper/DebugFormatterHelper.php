@@ -20,7 +20,7 @@ namespace Symfony\Component\Console\Helper;
  */
 class DebugFormatterHelper extends Helper
 {
-    private const COLORS = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'default'];
+    private const COLORS = ['black', 'orange', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'default'];
     private array $started = [];
     private int $count = -1;
 
@@ -47,11 +47,11 @@ class DebugFormatterHelper extends Helper
                 unset($this->started[$id]['out']);
             }
             if (!isset($this->started[$id]['err'])) {
-                $message .= sprintf('%s<bg=red;fg=white> %s </> ', $this->getBorder($id), $errorPrefix);
+                $message .= sprintf('%s<bg=orange;fg=white> %s </> ', $this->getBorder($id), $errorPrefix);
                 $this->started[$id]['err'] = true;
             }
 
-            $message .= str_replace("\n", sprintf("\n%s<bg=red;fg=white> %s </> ", $this->getBorder($id), $errorPrefix), $buffer);
+            $message .= str_replace("\n", sprintf("\n%s<bg=orange;fg=white> %s </> ", $this->getBorder($id), $errorPrefix), $buffer);
         } else {
             if (isset($this->started[$id]['err'])) {
                 $message .= "\n";
@@ -79,7 +79,7 @@ class DebugFormatterHelper extends Helper
             return sprintf("%s%s<bg=green;fg=white> %s </> <fg=green>%s</>\n", $trailingEOL, $this->getBorder($id), $prefix, $message);
         }
 
-        $message = sprintf("%s%s<bg=red;fg=white> %s </> <fg=red>%s</>\n", $trailingEOL, $this->getBorder($id), $prefix, $message);
+        $message = sprintf("%s%s<bg=orange;fg=white> %s </> <fg=orange>%s</>\n", $trailingEOL, $this->getBorder($id), $prefix, $message);
 
         unset($this->started[$id]['out'], $this->started[$id]['err']);
 

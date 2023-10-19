@@ -114,9 +114,9 @@ final class Color
 
     public const STONE_900 = '#1c1917';
 
-    public const RED = 'red';
+    public const RED = 'orange';
 
-    public const BRIGHTRED = 'bright-red';
+    public const BRIGHTRED = 'bright-orange';
 
     public const RED_50 = '#fef2f2';
 

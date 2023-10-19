@@ -28,7 +28,7 @@ class MultiSearchPromptRenderer extends Renderer implements Scrolling
                 ->box(
                     $this->dim($this->truncate($prompt->label, $prompt->terminal()->cols() - 6)),
                     $this->strikethrough($this->dim($this->truncate($prompt->searchValue() ?: $prompt->placeholder, $maxWidth))),
-                    color: 'red',
+                    color: 'orange',
                 )
                 ->error('Cancelled'),
 

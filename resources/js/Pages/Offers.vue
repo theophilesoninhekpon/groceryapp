@@ -33,15 +33,15 @@ const canShowEditModalForm = () => {
     showEditModal.value = true; 
 }
 
-Echo.private(`offers`)
-    .listen('OfferCreate', (e) => {
+// Echo.private(`offers`)
+//     .listen('OfferCreate', (e) => {
 
-        showNotification.value = true;
-        setTimeout(() => {
-            showNotification.value = false;
-        }, 3000);
+//         showNotification.value = true;
+//         setTimeout(() => {
+//             showNotification.value = false;
+//         }, 3000);
         
-    });
+//     });
 
 /**
  * 
@@ -64,7 +64,7 @@ const getOfferData = (id) => {
         <template #title>
             <div class="flex items-center">
                 Offres
-                <div class="ml-3 p-4 rounded-full bg-red-400 flex items-center justify-center text-white text-2xl w-5 h-5">
+                <div class="ml-3 p-4 rounded-full bg-orange-400 flex items-center justify-center text-white text-2xl w-5 h-5">
                     {{ offers.length }}
                 </div>
                 <div class="flex justify-end ml-10">
@@ -76,7 +76,7 @@ const getOfferData = (id) => {
             </div>
         </template>
 
-        <div class="absolute z-10 top-42 right-24 bg-red-400 px-10 py-5 shadow-lg rounded-lg text-white" v-if="showNotification">
+        <div class="absolute z-10 top-42 right-24 bg-orange-400 px-10 py-5 shadow-lg rounded-lg text-white" v-if="showNotification">
             Une offre a été créée! 
         </div>
 
@@ -107,12 +107,12 @@ const getOfferData = (id) => {
 
             <!-- Cartes des offres -->
             <div class="flex justify-center flex-wrap gap-x-20 gap-y-5 mt-10 mx-10">
-                <button v-for="offer in offers" class="w-1/4 p-5 rounded-lg shadow-md bg-white hover:bg-red-200 transition-all duration-500" @click="getOfferData(offer.id)">
+                <button v-for="offer in offers" class="w-1/4 p-5 rounded-lg shadow-md bg-white hover:bg-orange-200 transition-all duration-500" @click="getOfferData(offer.id)">
                     <div class="flex flex-col items-center">
-                        <div class="flex bg-red-400 items-center justify-center p-5 rounded-full shadow-md mb-5">
+                        <div class="flex bg-orange-400 items-center justify-center p-5 rounded-full shadow-md mb-5">
                             <Icons name="dollar" />
                         </div>
-                        <h2 class="text-center text-2xl font-bold text-red-400 mb-5">{{ offer.description }}</h2>
+                        <h2 class="text-center text-2xl font-bold text-orange-400 mb-5">{{ offer.description }}</h2>
                         <div class="text-center">{{ offer.number_of_users }} utilisateurs</div>
                     </div>
                 </button>

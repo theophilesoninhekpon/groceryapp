@@ -28,7 +28,7 @@ const logout = () => {
         <div class="min-h-screen bg-gray-100 flex flex-col">
 
             <!-- Menu de navigation principale -->
-            <header class="flex justify-between bg-red-400 shadow-md h-1/5">
+            <header class="flex justify-between bg-orange-400 shadow-md h-1/5">
                 <div class="flex items-center">
                     <div class="flex items-center pr-24 pl-8">
                         <Link :href="route('dashboard')">
@@ -61,8 +61,9 @@ const logout = () => {
 
                     <Dropdown>
                         <template #trigger>
-                            <div class="cursor-pointer">
+                            <div class="cursor-pointer relative">
                                 <Icons name="user" />
+                                <div class="rounded-full w-3 h-3 bg-green-500 left-0  -bottom-1 absolute z-10"></div>
                             </div>
                         </template>
                         <template #content>
@@ -84,40 +85,40 @@ const logout = () => {
 
                 <!-- Menu de navigation latéral -->
                 <nav class="flex flex-col bg-zinc-700 height shadow-lg">
-                    <SideBarNavLink :active="route().current('dashboard')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                    <SideBarNavLink :active="route().current('dashboard')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('dashboard')">
                     Accueil
                     </SideBarNavLink >
                     <div>
                         <p class="pr-16 pl-10 pt-8 pb-6 text-zinc-300">Licences</p>
                         <div class="flex flex-col">
-                            <SideBarNavLink :active="route().current('offers')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-16 py-6 text-zinc-300"
+                            <SideBarNavLink :active="route().current('offers')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-16 py-6 text-zinc-300"
                                 :href="route('offers')">
                             Offres
                             </SideBarNavLink >
-                            <SideBarNavLink :active="route().current('licenses')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-16 py-6 text-zinc-300"
+                            <SideBarNavLink :active="route().current('licenses')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-16 py-6 text-zinc-300"
                                 :href="route('licenses')">
                             Gestion
                             </SideBarNavLink >
                         </div>
                     </div>
-                    <SideBarNavLink :active="route().current('tenants')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                    <SideBarNavLink :active="route().current('tenants')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('tenants')">
                     Clients
                     </SideBarNavLink >
-                    <SideBarNavLink :active="route().current('tickets')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                    <SideBarNavLink :active="route().current('tickets')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('tickets')">
                     Tickets
                     </SideBarNavLink >
-                    <SideBarNavLink :active="route().current('superadmin')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                    <SideBarNavLink :active="route().current('superadmin')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('users')">
                     Utilisateurs
                     </SideBarNavLink >
-                    <SideBarNavLink :active="route().current('troubleshooting')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                    <SideBarNavLink :active="route().current('troubleshooting')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('troubleshooting')">
                     Dépannage
                     </SideBarNavLink >
-                    <SideBarNavLink :active="route().current('settings')" class="hover:bg-gray-600 hover:text-red-400 pr-16 pl-10 py-8 text-zinc-300"
+                    <SideBarNavLink :active="route().current('settings')" class="hover:bg-gray-600 hover:text-orange-400 pr-16 pl-10 py-8 text-zinc-300"
                         :href="route('settings')">
                     Paramètres
                     </SideBarNavLink >

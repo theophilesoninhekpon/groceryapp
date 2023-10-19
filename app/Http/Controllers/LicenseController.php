@@ -150,7 +150,7 @@ class LicenseController extends Controller
 
         $this->tenantHasLicense($tenant, $license);
 
-        event(new LicenseCreated($license));
+        // event(new LicenseCreated($license));
 
     }
 

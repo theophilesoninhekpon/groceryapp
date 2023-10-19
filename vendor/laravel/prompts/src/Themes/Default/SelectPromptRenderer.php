@@ -28,7 +28,7 @@ class SelectPromptRenderer extends Renderer implements Scrolling
                 ->box(
                     $this->truncate($prompt->label, $prompt->terminal()->cols() - 6),
                     $this->renderOptions($prompt),
-                    color: 'red',
+                    color: 'orange',
                 )
                 ->error('Cancelled.'),
 
