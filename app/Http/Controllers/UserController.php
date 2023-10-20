@@ -21,7 +21,13 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('User', [
-            'users' => User::all(),
+            'users' => User::all()->transform(function($user) {
+                return [
+                    'id' => $user->id,
+                    'username' => $user->username,
+                    'role' => $user->roles()
+                ];
+            }),
             'invitations_sent' => Invitation::all()->transform(function ($invitation) {
                 return [
                     'email' => $invitation->email,
@@ -31,6 +37,7 @@ class UserController extends Controller
             })
         ]);
     }
+
 
     /**
      * Send user invitation to a guest
@@ -53,11 +60,11 @@ class UserController extends Controller
 
     }
 
+
     /**
      * Verify invited user 
      */
     public function verifyInvitedUser(int $invitationId, String $token) {
-
         
             try {
                 
@@ -101,22 +108,33 @@ class UserController extends Controller
         $invitation = Invitation::find($request->invitation);
         $invitation->update(['status' => 'ACCEPTED']);
 
+        //  Le premier utilisateur sur la plateforme devient l'administrateur
+        
         // Enregistrement de l'utilisateur dans la BDD
         $user = User::create([
             'name' => $validated['userName'],
             'email' => $invitation->email,
-            'password' => Hash::make($validated['password'])
+            'password' => Hash::make($validated['password']),
         ]);
 
+        // Régénérer la session (voir documentation)
         // On connecte l'utilisateur
         Auth::login($user);
 
         // On redirige l'utilisateur sur l'accueil
-        return redirect(RouteServiceProvider::HOME);
-
+        return redirect()->intended(RouteServiceProvider::HOME);
 
     }
 
+
+    /**
+     * Update the user right
+     */
+    public function updateRight(Request $request, User $user) {
+
+        $user->assignRole($request->right);
+
+    }
 
     /**
      * Show unauthorized user page 
@@ -184,6 +202,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
     }
 }

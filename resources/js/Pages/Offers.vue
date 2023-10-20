@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import {usePage} from "@inertiajs/vue3";
 import OfferDetails from "@/Components/CustomComponents/OfferDetails.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CreateButton from "@/Components/CustomComponents/CreateButton.vue";
@@ -14,13 +15,24 @@ const props = defineProps({
     offers: Object
 });
 
-// Variable qui conditionne l'affichage du modal
+
+const page = usePage();
 const showModal = ref(false);
 const showEditModal = ref(false);
 const showDetailsModal = ref(false);
 const offerData = ref({});
 const showNotification = ref(false);
-// const showExpiredNotification = ref(false);
+
+/**
+ * Au chargement du composant, on désactive tous les évènements clic
+ * si l'utilisateur n'est pas un administrateur ou gestionnaire de licence
+ */
+ onMounted(()=>{
+    if(page.props.auth.user.right !== 'Administrateur' && page.props.auth.user.right !== 'Gestionnaire de licence') {
+        document.removeEventListener('click', ()=> {});
+    };
+});
+
 
 // Afficher le modal des détails d'un formulaire
 const showOfferDetails = () => {

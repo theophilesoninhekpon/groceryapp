@@ -78,6 +78,8 @@ Route::middleware([
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::post('/users/send-invitation', [UserController::class, 'sendInvitation'])->name('users.invite');
     Route::delete('invitation/{invitation}/delete', [UserController::class, 'deleteInvitation'])->name('invitation.delete');
+    Route::patch('users/{user}/update-right', [UserController::class, 'updateRight'])->name('users.updateRight');
+    Route::delete('users/{user}/delete', [UserController::class, 'destroy'])->name('users.delete');
 
     // Routes de la vue Dépannage
     Route::get('/troubleshooting', function () {

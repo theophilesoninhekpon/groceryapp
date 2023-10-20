@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { usePage } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import ModalForm from "@/Components/CustomComponents/ModalForm.vue";
 import Icons from "@/Components/CustomComponents/Icons.vue";
@@ -9,8 +10,20 @@ const props = defineProps({
     clients: Object
 });
 
+const page = usePage();
 const client = ref({});
 const showClientDetailsModal = ref(false);
+
+/**
+ * Au chargement du composant, on désactive tous les évènements clic
+ * si l'utilisateur n'est pas un administrateur ou gestionnaire de licence
+ */
+ onMounted(()=>{
+    if(page.props.auth.user.right !== 'Administrateur' && page.props.auth.user.right !== 'Gestionnaire de licence') {
+        
+    };
+});
+
 
 const getCompanyInfos = (id) => {
 
@@ -62,7 +75,7 @@ const getCompanyInfos = (id) => {
                     </tr>
                     <tr v-for="(client, index) in clients" class="border-gray-200 border-2 text-center">
                         <td class="border-gray-200 border-2 px-3 py-3">
-                            {{ index }}
+                            {{ index + 1 }}
                         </td>
                         <td class="border-gray-200 border-2 px-3 py-3">
                             {{ client.company }}

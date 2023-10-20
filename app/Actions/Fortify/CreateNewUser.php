@@ -34,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
 
         // Le premier utilisateur sur la plateforme devient super admin
         if(count(User::all()) === 1) {
-            $user->assignRole('Accès Super-Administrateur');
+            $user->assignRole('Super-Administrateur');
         }
 
         return $user;

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { usePage } from '@inertiajs/vue3';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CreateButton from "@/Components/CustomComponents/CreateButton.vue";
 import ModalForm from "@/Components/CustomComponents/ModalForm.vue";
@@ -17,14 +18,23 @@ const props = defineProps({
     inactive_licenses: Number,
 });
 
-// const licensesData = ref(props.licenses);
+
+const page = usePage();
 const showModal = ref(false);
 const showOffersModal = ref(false);
 const availableOffers = ref({});
 const idOfLicenseToUpdate = ref(0);
 
 
-// const emit = defineEmits(["closeOffersModal"]);
+/**
+ * Au chargement du composant, on désactive tous les évènements clic
+ * si l'utilisateur n'est pas un administrateur ou gestionnaire de licence
+ */
+onMounted(()=>{
+    if(page.props.auth.user.right !== 'Administrateur' && page.props.auth.user.right !== 'Gestionnaire de licence') {
+        document.removeEventListener('click', ()=> {});
+    };
+});
 
 
 /**
@@ -165,9 +175,9 @@ const disableLicense = (license) => {
                         <th class="border-gray-200 border-2 py-3">Action</th>
                         <!-- <th class="border-gray-200 border-2 px-3 py-3"></th> -->
                     </tr>
-                    <tr v-for="license in licenses" class="border-gray-200 border-2 text-center">
+                    <tr v-for="(license, index) in licenses" class="border-gray-200 border-2 text-center">
                         <td class="border-gray-200 border-2 px-3 py-3">
-                            {{ license.id }}
+                            {{ index + 1 }}
                         </td>
                         <td class="border-gray-200 border-2 px-3 py-3">
                             {{ license.offer }}
@@ -182,8 +192,9 @@ const disableLicense = (license) => {
                             {{ license.purchased_at }}
                         </td>
                         <!-- <td class="border-gray-200 border-2 p-3"></td> -->
-                        <td class="border-gray-200 border-2 py-3 flex justify-center">
-                            <Dropdown class="ring-0">
+                        <td class="border-gray-200 border-2 py-3 ">
+                            <div class="flex justify-center">
+                                <Dropdown class="ring-0">
                                 <template #trigger>
                                     <div class="cursor-pointer">
                                         <Icons name="edit" />
@@ -198,6 +209,7 @@ const disableLicense = (license) => {
                                     </DropdownLink>
                                 </template>
                             </Dropdown>
+                            </div>
                         </td>
                     </tr>
                 </table>

@@ -19,40 +19,57 @@ class PermissionSeeder extends Seeder
          // Reset cached roles and permissions
          app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-         // create permissions
-         Permission::create(['name' => 'Accès Super-Administrateur']);
-         Permission::create(['name' => 'Accès Administrateur']);
-         Permission::create(['name' => 'Accès Agent']);
-         Permission::create(['name' => 'Accès Superviseur']);
-         Permission::create(['name' => 'Accès Chef-Plateau']);
-         Permission::create(['name' => 'Accès DataManager']);
-         Permission::create(['name' => 'Accès Coach']);
-         Permission::create(['name' => 'Accès Ecoute']);
+        //  Maintenancier', 'Support', 'Gestionnaire de licence', 'Administrateur
+         
+        //  Droit sur toute l'application
+         Permission::create(['guard_name' => 'tenant', 'name' => 'Super-Administrateur']);
+        //  Droits des tenants
+         Permission::create(['guard_name' => 'tenant', 'name' => 'Administrateur']);
+         Permission::create(['guard_name' => 'tenant', 'name' => 'Agent']);
+         Permission::create(['guard_name' => 'tenant', 'name' => 'Superviseur']);
+         Permission::create(['guard_name' => 'tenant', 'name' => 'Chef-Plateau']);
+         Permission::create(['guard_name' => 'tenant', 'name' => 'DataManager']);
+         Permission::create(['guard_name' => 'tenant', 'name' => 'Coach']);
+         Permission::create(['guard_name' => 'tenant', 'name' => 'Ecoute']);
+
+        //  Droits du landlord
+         Permission::create(['guard_name' => 'web', 'name' => 'Support']);
+         Permission::create(['guard_name' => 'web', 'name' => 'Gestionnaire de licence']);
+         Permission::create(['guard_name' => 'web', 'name' => 'Maintenancier']);
 
         //  create roles
-         $superAdminRole = Role::create(['name' => 'Accès Super-Administrateur']);
-         $superAdminRole->givePermissionTo('Accès Super-Administrateur');
+         $superAdminRole = Role::create(['guard_name' => 'tenant', 'name' => 'Super-Administrateur']);
+         $superAdminRole->givePermissionTo('Super-Administrateur');
 
-         $agentRole = Role::create(['name' => 'Accès Administrateur']);
-         $agentRole->givePermissionTo('Accès Administrateur');
+         $agentRole = Role::create(['guard_name' => 'tenant', 'name' => 'Administrateur']);
+         $agentRole->givePermissionTo('Administrateur');
 
-         $agentRole = Role::create(['name' => 'Accès Agent']);
-         $agentRole->givePermissionTo('Accès Agent');
+         $agentRole = Role::create(['guard_name' => 'tenant', 'name' => 'Agent']);
+         $agentRole->givePermissionTo('Agent');
 
-         $supervisorRole = Role::create(['name' => 'Accès Superviseur']);
-         $supervisorRole->givePermissionTo('Accès Superviseur');
+         $supervisorRole = Role::create(['guard_name' => 'tenant', 'name' => 'Superviseur']);
+         $supervisorRole->givePermissionTo('Superviseur');
 
-         $chefPlateauRole = Role::create(['name' => 'Accès Chef-Plateau']);
-         $chefPlateauRole->givePermissionTo('Accès Chef-Plateau');
+         $chefPlateauRole = Role::create(['guard_name' => 'tenant', 'name' => 'Chef-Plateau']);
+         $chefPlateauRole->givePermissionTo('Chef-Plateau');
 
-         $dataManagerRole = Role::create(['name' => 'Accès DataManager']);
-         $dataManagerRole->givePermissionTo('Accès DataManager');
+         $dataManagerRole = Role::create(['guard_name' => 'tenant', 'name' => 'DataManager']);
+         $dataManagerRole->givePermissionTo('DataManager');
 
-         $coachRole = Role::create(['name' => 'Accès Coach']);
-         $coachRole->givePermissionTo('Accès Coach');
+         $coachRole = Role::create(['guard_name' => 'tenant', 'name' => 'Coach']);
+         $coachRole->givePermissionTo('Coach');
 
-         $ecouteRole = Role::create(['name' => 'Accès Ecoute']);
-         $ecouteRole->givePermissionTo('Accès Ecoute');
+         $ecouteRole = Role::create(['guard_name' => 'tenant', 'name' => 'Ecoute']);
+         $ecouteRole->givePermissionTo('Ecoute');
+
+         $dataManagerRole = Role::create(['guard_name' => 'web', 'name' => 'Maintenancier']);
+         $dataManagerRole->givePermissionTo('Maintenancier');
+
+         $coachRole = Role::create(['guard_name' => 'web', 'name' => 'Support']);
+         $coachRole->givePermissionTo('Support');
+
+         $ecouteRole = Role::create(['guard_name' => 'web', 'name' => 'Gestionnaire de licence']);
+         $ecouteRole->givePermissionTo('Gestionnaire de licence');
          
 }
 }
